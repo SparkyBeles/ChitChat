@@ -1,0 +1,19 @@
+# IntelliJ IDEA/Android Studio files
+*.iml
+.gradle
+/local.properties
+/.idea/caches
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
+
+# macOS-specific files
+.DS_Store
+
+# Build files
+/build
+/captures
+.externalNativeBuild
+.cxx

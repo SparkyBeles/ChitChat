@@ -1,0 +1,75 @@
+# Default ignored files
+# IntelliJ IDEA workspace och shelved ändringar
+/shelf/
+/workspace.xml
+
+# Gradle
+.gradle/
+build/
+
+# IntelliJ IDEA
+.idea/
+*.iml
+
+# Lokala konfigurationsfiler
+local.properties
+
+# Loggfiler
+*.log
+
+# Cache-filer
+.DS_Store
+*.class
+
+# Android Studio-specifikt
+*.apk
+*.ap_
+captures/
+
+# Operativsystem-specifikt
+# macOS
+*.DS_Store
+.idea/**/workspace.xml
+.idea/**/tasks.xml
+.idea/dictionaries
+.idea/**/vcs.xml
+.idea/**/shelf/
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Linux
+*.swp
+*.swo
+
+# Java IDE
+*.ipr
+*.iws
+*.idea/modules.xml
+
+# Android dependencies
+/.cxx/
+.externalNativeBuild/
+.idea/libraries/
+
+# Keystore (säkerhet!)
+*.jks
+
+# Inställningar för gradle-wrapper
+gradle/wrapper/gradle-wrapper.properties
+
+# Lint och test-artefakter
+lint/intermediates/
+lint/generated/
+lint/generated_tests/
+lint/reports/
+lint/reports_tests/
+
+# Generated JSON Files
+*.json
+
+# Native build cache
+.cxx/
+
