@@ -28,9 +28,14 @@ class MainActivity : AppCompatActivity() {
 
         val db = Firebase.firestore
         showSignInFragment()
-binding.signUpBtn.setOnClickListener {
-    showSignUpFragment()
-}
+        binding.signUpBtn.setOnClickListener {
+            showSignUpFragment()
+        }
+
+
+        binding.signInBtn.setOnClickListener {
+            showSignInFragment()
+        }
     }
 
     fun showSignInFragment() {
@@ -39,10 +44,13 @@ binding.signUpBtn.setOnClickListener {
         transaction.replace(R.id.authFrame, signInFragment, "SignInFragment")
         transaction.commit()
     }
+
     fun showSignUpFragment() {
         val signUpFragment = SignUpFragment()
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.authFrame, signUpFragment, "SignUpFragment")
         transaction.commit()
     }
+
 }
+

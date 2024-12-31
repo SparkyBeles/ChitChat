@@ -62,24 +62,24 @@
             android:id="@+id/userNameEd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="50dp"
             android:ems="10"
             android:gravity="center"
             android:hint="Please enter your name"
             android:inputType="text"
+            android:textColor="@color/white"
             android:textColorHint="#ADFFFFFF"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView2"
-            android:textColor="@color/white"/>
+            app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
         <TextView
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="New account"
+            android:text="Create an account"
             android:textColor="@color/white"
             android:textSize="60sp"
             app:layout_constraintEnd_toEndOf="parent"
