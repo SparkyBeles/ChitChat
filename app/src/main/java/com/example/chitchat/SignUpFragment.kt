@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.FragmentManager
 import com.example.chitchat.databinding.FragmentSignInBinding
 import com.example.chitchat.databinding.FragmentSignUpBinding
 import com.google.firebase.Firebase
@@ -54,6 +55,10 @@ class SignUpFragment : Fragment() {
                 if (task.isSuccessful) {
 
                     Toast.makeText(context,"User is created!", Toast.LENGTH_SHORT).show()
+
+                    parentFragmentManager.beginTransaction()
+                        .replace(R.id.authFrame, SignInFragment())
+                        .commit()
 
 
                 } else {
