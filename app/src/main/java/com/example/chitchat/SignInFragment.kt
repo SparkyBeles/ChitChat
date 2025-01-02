@@ -10,6 +10,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.chitchat.databinding.FragmentSignInBinding
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
+import com.google.firebase.auth.FirebaseAuthInvalidUserException
 import com.google.firebase.auth.auth
 
 class SignInFragment : Fragment() {
@@ -24,7 +26,7 @@ class SignInFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentSignInBinding.inflate(
             inflater,
             container,
@@ -39,12 +41,9 @@ class SignInFragment : Fragment() {
             }
         }
 
-        var email = binding.emailEt
-        var password = binding.passwordEt
         var signInBtn = binding.signInFragmentBtn
         signInBtn.setOnClickListener {
             signIn()
-            vm.startChat.value = true
         }
         return binding.root
     }
@@ -64,11 +63,20 @@ class SignInFragment : Fragment() {
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
+                    vm.startChat.value = true
 //                    Toast.makeText(context, "Welcome back!", Toast.LENGTH_SHORT).show()
                     val user = auth.currentUser
                 } else {
+                    val exception = task.exception
 
-//                    Toast.makeText(context, "Oh no :(", Toast.LENGTH_SHORT).show()
+                    when (exception) {
+                        is FirebaseAuthInvalidCredentialsException -> {
+                            Toast.makeText(context, "Incorrect E-Mail or Password", Toast.LENGTH_SHORT).show()
+                        }
+                        else -> {
+                            Toast.makeText(context, "Login failed: ${exception?.message}", Toast.LENGTH_SHORT).show()
+                        }
+                    }
                 }
             }
     }
