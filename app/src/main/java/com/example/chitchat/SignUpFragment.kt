@@ -55,11 +55,17 @@ class SignUpFragment : Fragment() {
                 if (task.isSuccessful) {
 
                     Toast.makeText(context,"User is created!", Toast.LENGTH_SHORT).show()
+                    val fragmentManager = parentFragmentManager
+                    val fragmentTransaction = fragmentManager.beginTransaction()
 
                     parentFragmentManager.beginTransaction()
                         .replace(R.id.authFrame, SignInFragment())
                         .commit()
 
+                    val fragmentB = SignInFragment()
+                    fragmentTransaction.replace(R.id.authFrame, fragmentB)
+
+                    fragmentTransaction.commit()
 
                 } else {
                     Toast.makeText(context,"User not created", Toast.LENGTH_SHORT).show()
