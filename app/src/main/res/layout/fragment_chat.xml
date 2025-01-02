@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/sendButtton"
     android:layout_width="match_parent"
@@ -8,35 +9,45 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/chatRecycler"
             android:layout_width="match_parent"
-            android:layout_height="500dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="5dp"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="0dp"
             tools:listitem="@layout/chat_item" />
 
         <EditText
             android:id="@+id/tMessage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:ems="10"
             android:hint="Message"
-            android:inputType="text" />
+            android:inputType="text"
+            app:layout_constraintBottom_toTopOf="@+id/bSend"
+            tools:layout_editor_absoluteX="40dp" />
 
         <Button
             android:id="@+id/bSend"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Send" />
+            android:layout_marginBottom="10dp"
+            android:text="Send"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:layout_editor_absoluteX="26dp" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 
-    </LinearLayout>
 
 
 </FrameLayout>
