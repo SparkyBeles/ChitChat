@@ -8,21 +8,16 @@
     tools:context=".ChatActivity">
 
 
-    <LinearLayout
-        android:layout_width="409dp"
-        android:layout_height="729dp"
-        android:orientation="vertical"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="1dp">
+    <FrameLayout
+        android:id="@+id/friendsOrChat"
+        android:layout_width="match_parent"
+
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
+        app:layout_constraintTop_toTopOf="parent">
 
 
-        <FrameLayout
-            android:id="@+id/friendsOrChat"
-            android:layout_width="match_parent"
-            android:layout_height="600dp">
-
-
-        </FrameLayout>
+    </FrameLayout>
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomNavigationView"
@@ -36,5 +31,5 @@
 
 
 
-    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
