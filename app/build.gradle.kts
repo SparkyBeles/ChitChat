@@ -52,4 +52,13 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    //  Splash Screen  API
+    implementation(libs.androidx.core.splashscreen)
+
+
+
+    //  For loading GIFs with coil
+    implementation(libs.coil.compose)
+    implementation(libs.coil.network.okhttp)
 }
