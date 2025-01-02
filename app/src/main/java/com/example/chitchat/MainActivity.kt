@@ -49,6 +49,7 @@ auth = Firebase.auth
         vm.startChat.observe(this) { startChat ->
             if(startChat) {
                 val chatIntent = Intent(this, ChatActivity::class.java)
+                chatIntent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
                 startActivity(chatIntent)
                 vm.startChat.value = false
             }
