@@ -1,10 +1,12 @@
 package com.example.chitchat
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.ViewModelProvider
 import com.example.chitchat.databinding.ActivityMainBinding
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
@@ -13,6 +15,7 @@ import com.google.firebase.firestore.firestore
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
     lateinit var auth: FirebaseAuth // Not sure we'll need auth in main though
+    lateinit var vm : ChatViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,6 +30,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         val db = Firebase.firestore
+        vm = ViewModelProvider(this).get(ChatViewModel::class.java)
         showSignInFragment()
         binding.signUpBtn.setOnClickListener {
             showSignUpFragment()
@@ -35,6 +39,14 @@ class MainActivity : AppCompatActivity() {
 
         binding.signInBtn.setOnClickListener {
             showSignInFragment()
+        }
+
+        vm.startChat.observe(this) { startChat ->
+            if(startChat) {
+                val chatIntent = Intent(this, ChatActivity::class.java)
+                startActivity(chatIntent)
+                vm.startChat.value = false
+            }
         }
     }
 
