@@ -29,8 +29,11 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        val db = Firebase.firestore
+
+        //val db = Firebase.firestore // flyttad till firebasemanager
+
         vm = ViewModelProvider(this).get(ChatViewModel::class.java)
+
         showSignInFragment()
         binding.signUpBtn.setOnClickListener {
             showSignUpFragment()
