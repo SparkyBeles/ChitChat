@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        val db = Firebase.firestore
+        //val db = Firebase.firestore // flyttad till firebasemanager
         showSignInFragment()
         binding.signUpBtn.setOnClickListener {
             showSignUpFragment()
