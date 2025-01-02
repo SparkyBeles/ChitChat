@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ChitChat</string>
+    <string name="chat_activity">CHAT ACTIVITET</string>
+    <string name="don_t_have_an_account_yet">Har inget konto än?</string>
+    <string name="sign_up">Registrera</string>
+    <string name="sign_in">Logga in</string>
+    <string name="email">Epost</string>
+    <string name="password">Lösenord</string>
+    <string name="welcome_back">Välkommen tillbaka!</string>
+    <string name="create_account">Skapa konto</string>
+    <string name="please_enter_your_name">Skriv ditt namn</string>
+    <string name="create_an_account">Skapa konto</string>
+</resources>
