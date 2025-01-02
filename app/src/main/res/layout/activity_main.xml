@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:paddingTop="40dp"
-            android:text="Don't have an account yet?"
+            android:text="@string/don_t_have_an_account_yet"
             android:textColor="#5B5858" />
 
         <LinearLayout
@@ -50,7 +50,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:background="#00000000"
-                android:text="Sign up"
+                android:text="@string/sign_up"
                 android:textColor="@color/white" />
 
             <Button
@@ -59,7 +59,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
                 android:background="#00000000"
-                android:text="Sign in"
+                android:text="@string/sign_in"
                 android:textColor="@color/white" />
         </LinearLayout>
 

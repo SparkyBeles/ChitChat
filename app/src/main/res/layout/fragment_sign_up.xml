@@ -7,8 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".SignInFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -19,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="70dp"
-            android:text="Create account"
+            android:text="@string/create_account"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/passwordEt"
@@ -32,7 +30,7 @@
             android:layout_marginTop="50dp"
             android:ems="10"
             android:gravity="center"
-            android:hint="Email"
+            android:hint="@string/email"
             android:inputType="textEmailAddress"
             android:textColorHint="#ADFFFFFF"
             android:textSize="20sp"
@@ -48,7 +46,7 @@
             android:layout_marginTop="50dp"
             android:ems="10"
             android:gravity="center"
-            android:hint="Password"
+            android:hint="@string/password"
             android:inputType="textPassword"
             android:textColorHint="#ADFFFFFF"
             android:textSize="20sp"
@@ -64,7 +62,7 @@
             android:layout_marginTop="50dp"
             android:ems="10"
             android:gravity="center"
-            android:hint="Please enter your name"
+            android:hint="@string/please_enter_your_name"
             android:inputType="text"
             android:textColor="@color/white"
             android:textColorHint="#ADFFFFFF"
@@ -78,7 +76,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="Create an account"
+            android:text="@string/create_an_account"
             android:textColor="@color/white"
             android:textSize="60sp"
             app:layout_constraintEnd_toEndOf="parent"
