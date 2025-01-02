@@ -5,16 +5,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.chitchat.databinding.FragmentChatBinding
 import com.google.firebase.Firebase
 
 
 class ChatFragment : Fragment() {
     private var _binding: FragmentChatBinding? =
-        null//////////////////////////min kod/////////////////////////////////
-    private val binding get() = _binding!! //////////////////////////min kod/////////////////////////////////
+        null
+    private val binding get() = _binding!!
 
-    // myRef.setValue("Hello, World!")
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -24,8 +24,7 @@ class ChatFragment : Fragment() {
             inflater,
             container,
             false
-        )//min kod
-        // Inflate the layout for this fragment
+        )
 
         return binding.root
     }
@@ -33,16 +32,21 @@ class ChatFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//val whoSend = database.getReference("name")
+
         val bSend = binding.bSend
-        val tMessage = binding.tMessage
 
-
+        var messages = mutableListOf<String>()
+        messages.add("Hello")
+        messages.add("How are you?")
         bSend.setOnClickListener {
 
 
         }
-
+        val chatRecycler = binding.chatRecycler
+        chatRecycler.layoutManager = LinearLayoutManager(requireContext())
+        val adapter = ChatAdapter(requireContext(), messages)
+        chatRecycler.adapter = adapter
 
     }
+
 }
