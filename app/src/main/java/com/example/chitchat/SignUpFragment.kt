@@ -1,6 +1,7 @@
 package com.example.chitchat
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -15,9 +16,9 @@ import com.google.firebase.auth.auth
 
 class SignUpFragment : Fragment() {
     var auth: FirebaseAuth = Firebase.auth
+    private val firebaseManager = FirebaseManager()
 
-    private var _binding: FragmentSignUpBinding? =
-        null
+    private var _binding: FragmentSignUpBinding? = null
     private val binding get() = _binding!!
 
 
@@ -30,7 +31,6 @@ class SignUpFragment : Fragment() {
             container,
             false
         )
-        var name = binding.userNameEd
         var signUpBtn = binding.signUpFragmentBtn
         signUpBtn.setOnClickListener {
             signUp()
@@ -44,32 +44,34 @@ class SignUpFragment : Fragment() {
     }
 
     fun signUp() {
+        val name = binding.userNameEd.text.toString()
         val email = binding.emailEt.text.toString()
         val password = binding.passwordEt.text.toString()
 
-        if (email.isEmpty() || password.isEmpty()) {
+        if (name.isEmpty() || email.isEmpty() || password.isEmpty()) {
             return
         }
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
+                    val currentUser = auth.currentUser
+                    val user = User(
+                        id = currentUser?.uid ?: "",
+                        name = name,
+                        email = email
+                    )
+
+                    firebaseManager.saveNewUser(user)
 
                     Toast.makeText(context,"User is created!", Toast.LENGTH_SHORT).show()
-                    val fragmentManager = parentFragmentManager
-                    val fragmentTransaction = fragmentManager.beginTransaction()
 
                     parentFragmentManager.beginTransaction()
                         .replace(R.id.authFrame, SignInFragment())
                         .commit()
 
-                    val fragmentB = SignInFragment()
-                    fragmentTransaction.replace(R.id.authFrame, fragmentB)
-
-                    fragmentTransaction.commit()
-
                 } else {
                     Toast.makeText(context,"User not created", Toast.LENGTH_SHORT).show()
-                    //   Log.d("!!!", "user not created ${task.exception}")
+                    Log.d("!!!", "user not created ${task.exception}")
                 }
             }
     }

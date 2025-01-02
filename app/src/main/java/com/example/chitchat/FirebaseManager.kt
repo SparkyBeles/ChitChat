@@ -1,8 +1,10 @@
 package com.example.chitchat
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.Firebase
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.auth
 import com.google.firebase.firestore.firestore
@@ -10,33 +12,49 @@ import com.google.firebase.firestore.toObject
 
 class FirebaseManager {
     private val db = Firebase.firestore
+    private val auth = FirebaseAuth.getInstance()
 
-    lateinit var currentUser: FirebaseUser
+//    private val _users = MutableLiveData(mutableListOf<User>())
+//    val users: LiveData<MutableList<User>> get() = _users
 
-    private val _user = MutableLiveData(mutableListOf<User>())
+    private val _currentUser = MutableLiveData<User>()
+    val currentUser: LiveData<User> get() = _currentUser
 
-    val user: LiveData<MutableList<User>> get() = _user
-   init{
-      addSnapchotListener()
-   }
-    fun addSnapchotListener(){
-        currentUser = Firebase.auth.currentUser ?: return
-        db.collection("user").document(currentUser.uid).collection("users").addSnapshotListener { snapshot, error ->
-            if(snapshot != null){
-                val currentList = mutableListOf<User>()
-                for(doc in snapshot.documents){
-                    val user = doc.toObject<User>()
-                    if( user!= null){
-                        currentList.add(user)
-                    }
-                }
-                _user.value = currentList
-            }
+    init{
+        addSnapshotListenerForCurrentUser()
+    }
+
+    fun addSnapshotListenerForCurrentUser(){
+        val firebaseUser = auth.currentUser
+        if (firebaseUser == null){
+            Log.e("Firebase", "No user logged in")
+            return
         }
 
+        db.collection("users").document(firebaseUser.uid)
+            .addSnapshotListener{ snapshot, e ->
+                if (e != null){
+                    Log.e("Firebase", "User not found $e")
+                    return@addSnapshotListener
+                }
+                snapshot?.toObject<User>()?.let { user ->
+                    _currentUser.postValue(user)
+                }
+            }
+
     }
 
-    fun addUser(name:String,id:Int){
-        val user = User(name,id)
+    fun saveNewUser(user: User){
+        val userId = auth.currentUser?.uid ?: return
+        db.collection("users").document(userId)
+            .set(user)
+            .addOnSuccessListener {
+                Log.i("Firebase", "User added successfully")
+            }
+            .addOnFailureListener {
+                Log.e("Firebase", "Failed to add user")
+            }
     }
+
+
 }
