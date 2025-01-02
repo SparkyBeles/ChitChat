@@ -13,8 +13,8 @@ class FriendsFragment : Fragment() {
 
 
     private var _binding: FragmentFriendsBinding? =
-        null//////////////////////////min kod/////////////////////////////////
-    private val binding get() = _binding!! //////////////////////////min kod/////////////////////////////////
+        null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,8 +25,7 @@ class FriendsFragment : Fragment() {
             inflater,
             container,
             false
-        )//min kod
-        // Inflate the layout for this fragment
+        )
 
 
         return binding.root

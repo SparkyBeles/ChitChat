@@ -36,12 +36,9 @@ class ChatActivity : AppCompatActivity() {
             insets
         }
         chatButton = findViewById(R.id.chatButton)
-        //binding.main.maxWidth = 7
+
         friendsButton = findViewById(R.id.friendsButton)
         signOutButton = findViewById(R.id.signOutButton)
-
-        //  friendsButton = binding.friendsButton
-        // showFriendsListFragment()
         friendsButton.setOnClickListener {
             showFriendsListFragment()
         }

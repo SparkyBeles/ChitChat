@@ -10,9 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 class FriendsAdapter(val context: Context, val friendList: MutableList<String>) : RecyclerView.Adapter<FriendsAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val friend: TextView = itemView.findViewById(R.id.friend) //находит кнопки и прочее внутри одного элемента ресайкла
-
-        //обычная штука, как в мейнАктивити
+        val friend: TextView = itemView.findViewById(R.id.friend)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -22,8 +20,7 @@ class FriendsAdapter(val context: Context, val friendList: MutableList<String>) 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        holder.friend.text = friendList[position] //берет из иннер вьюхолдера,
-//holder.photoImageView.background = photo.background
+        holder.friend.text = friendList[position]
     }
 
     override fun getItemCount(): Int {
