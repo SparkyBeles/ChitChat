@@ -53,7 +53,6 @@ class SignInFragment : Fragment() {
                 if (task.isSuccessful) {
                     Toast.makeText(context, "Welcome back!", Toast.LENGTH_SHORT).show()
                     val user = auth.currentUser
-                    //   println("Inloggad som: ${user?.email}")
                 } else {
 
                     Toast.makeText(context, "Oh no :(", Toast.LENGTH_SHORT).show()
