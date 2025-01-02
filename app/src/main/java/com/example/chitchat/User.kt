@@ -1,5 +1,7 @@
 package com.example.chitchat
 
-data class User(val name:String, val id:Int) {
-    constructor(): this("",0)
-}
+data class User(
+    val id: String = "",
+    val name: String = "",
+    val email: String = ""
+)
