@@ -2,6 +2,7 @@ package com.example.chitchat
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -10,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.chitchat.databinding.ActivityMainBinding
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.auth
 import com.google.firebase.firestore.firestore
 
 class MainActivity : AppCompatActivity() {
@@ -29,7 +31,7 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-
+auth = Firebase.auth
         //val db = Firebase.firestore // flyttad till firebasemanager
 
         vm = ViewModelProvider(this).get(ChatViewModel::class.java)
@@ -50,6 +52,11 @@ class MainActivity : AppCompatActivity() {
                 startActivity(chatIntent)
                 vm.startChat.value = false
             }
+        }
+        if (auth.currentUser != null) {
+            Toast.makeText(this,"Welcome back!", Toast.LENGTH_SHORT).show()
+            val chatIntent = Intent(this, ChatActivity::class.java)
+            startActivity(chatIntent)
         }
     }
 
