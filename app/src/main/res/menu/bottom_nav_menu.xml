@@ -9,7 +9,7 @@
         android:icon="@drawable/ic_friends_foreground"
         android:title="Chat" />
     <item
-        android:id="@+id/signOut"
+        android:id="@+id/profile"
         android:icon="@drawable/ic_friends_foreground"
-        android:title="Sign out" />
+        android:title="Profile" />
 </menu>
