@@ -2,6 +2,7 @@ package com.example.chitchat
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -10,12 +11,13 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.chitchat.databinding.ActivityMainBinding
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.auth
 import com.google.firebase.firestore.firestore
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
     lateinit var auth: FirebaseAuth // Not sure we'll need auth in main though
-    lateinit var vm : ChatViewModel
+    lateinit var vm: ChatViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,7 +31,7 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-
+        auth = Firebase.auth
         //val db = Firebase.firestore // flyttad till firebasemanager
 
         vm = ViewModelProvider(this).get(ChatViewModel::class.java)
@@ -45,11 +47,17 @@ class MainActivity : AppCompatActivity() {
         }
 
         vm.startChat.observe(this) { startChat ->
-            if(startChat) {
+            if (startChat) {
                 val chatIntent = Intent(this, ChatActivity::class.java)
+                chatIntent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
                 startActivity(chatIntent)
                 vm.startChat.value = false
             }
+        }
+        if (auth.currentUser != null) {
+            Toast.makeText(this, "Welcome back!", Toast.LENGTH_SHORT).show()
+            val chatIntent = Intent(this, ChatActivity::class.java)
+            startActivity(chatIntent)
         }
     }
 

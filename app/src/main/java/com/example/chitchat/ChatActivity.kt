@@ -11,6 +11,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.chitchat.databinding.ActivityChatBinding
 import com.example.chitchat.databinding.ActivityMainBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
@@ -35,20 +36,40 @@ class ChatActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        chatButton = findViewById(R.id.chatButton)
+        showFriendsListFragment()
+        val bottomnav = findViewById<BottomNavigationView>(R.id.bottomNavigationView) //binding doesn't work
+        bottomnav.setOnItemSelectedListener { item ->
+            when(item.itemId) {
+                R.id.chat -> {
+                    showChatFragment()
+                    true
+                }
+                R.id.person -> {
+                    showFriendsListFragment()
+                    true
+                }
+                R.id.signOut -> {
+                    signOut()
+                    true
+                }
+                else -> false
+            }
+        }
+//        chatButton = findViewById(R.id.chatButton)
+//
+//        friendsButton = findViewById(R.id.friendsButton)
+//        signOutButton = findViewById(R.id.signOutButton)
+//        friendsButton.setOnClickListener {
+//            showFriendsListFragment()
+//        }
+//
+//        chatButton.setOnClickListener {
+//            showChatFragment()
+//        }
+//        signOutButton.setOnClickListener {
+//            signOut()
+//        }
 
-        friendsButton = findViewById(R.id.friendsButton)
-        signOutButton = findViewById(R.id.signOutButton)
-        friendsButton.setOnClickListener {
-            showFriendsListFragment()
-        }
-
-        chatButton.setOnClickListener {
-            showChatFragment()
-        }
-        signOutButton.setOnClickListener {
-            signOut()
-        }
 
     }
 
