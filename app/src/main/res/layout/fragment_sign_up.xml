@@ -16,12 +16,13 @@
             android:id="@+id/signUpFragmentBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="70dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="30dp"
             android:text="@string/create_account"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/passwordEt"
-            />
+            app:layout_constraintTop_toBottomOf="@+id/passwordEt" />
 
         <EditText
             android:id="@+id/emailEt"
@@ -78,7 +79,7 @@
             android:layout_marginTop="20dp"
             android:text="@string/create_an_account"
             android:textColor="@color/white"
-            android:textSize="60sp"
+            android:textSize="40sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
