@@ -7,25 +7,32 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class FriendsAdapter(val context: Context, val friendList: MutableList<String>) : RecyclerView.Adapter<FriendsAdapter.ViewHolder>() {
+class FriendsAdapter(
+    private val context: Context,
+    private val friends: List<User>,
+    private val onClick: (User) -> Unit
+) : RecyclerView.Adapter<FriendsAdapter.FriendViewHolder>() {
 
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val friend: TextView = itemView.findViewById(R.id.friend)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FriendViewHolder {
+        val view = LayoutInflater.from(context).inflate(R.layout.friend_item, parent, false)
+        return FriendViewHolder(view)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val itemView = LayoutInflater.from(context).inflate(R.layout.friend_item, parent, false)
-        return ViewHolder(itemView)
+    override fun onBindViewHolder(holder: FriendViewHolder, position: Int) {
+        val friend = friends[position]
+        holder.bind(friend)
+        holder.itemView.setOnClickListener {
+            onClick(friend)
+        }
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun getItemCount(): Int = friends.size
 
-        holder.friend.text = friendList[position]
+    class FriendViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private val friendName: TextView = itemView.findViewById(R.id.friend)
+
+        fun bind(friend: User) {
+            friendName.text = friend.name
+        }
     }
-
-    override fun getItemCount(): Int {
-        return friendList.size
-    }
-
-
 }

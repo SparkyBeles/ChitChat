@@ -14,7 +14,7 @@ class ChatAdapter(val context: Context, val messages: MutableList<String>) :
     RecyclerView.Adapter<ChatAdapter.ViewHolder>() {
     var auth: FirebaseAuth = Firebase.auth
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val message: TextView = itemView.findViewById(R.id.message)
+        val message: TextView = itemView.findViewById(R.id.textView)
 
     }
 
@@ -35,6 +35,4 @@ class ChatAdapter(val context: Context, val messages: MutableList<String>) :
     override fun getItemCount(): Int {
         return messages.size
     }
-
-
 }
