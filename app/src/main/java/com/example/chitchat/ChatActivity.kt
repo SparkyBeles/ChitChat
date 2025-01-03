@@ -48,8 +48,8 @@ class ChatActivity : AppCompatActivity() {
                     showFriendsListFragment()
                     true
                 }
-                R.id.signOut -> {
-                    signOut()
+                R.id.profile -> {
+                    showProfileFragment()
                     true
                 }
                 else -> false
@@ -74,7 +74,12 @@ class ChatActivity : AppCompatActivity() {
     }
 
 
-
+fun showProfileFragment() {
+    val profileFragment = ProfileFragment()
+    val transaction = supportFragmentManager.beginTransaction()
+    transaction.replace(R.id.friendsOrChat, profileFragment, "Friends")
+    transaction.commit()
+}
     fun showFriendsListFragment() {
         val friendsListFragment = FriendsFragment()
         val transaction = supportFragmentManager.beginTransaction()
