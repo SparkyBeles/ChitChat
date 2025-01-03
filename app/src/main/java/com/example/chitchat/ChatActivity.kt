@@ -36,6 +36,7 @@ class ChatActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        showFriendsListFragment()
         val bottomnav = findViewById<BottomNavigationView>(R.id.bottomNavigationView) //binding doesn't work
         bottomnav.setOnItemSelectedListener { item ->
             when(item.itemId) {

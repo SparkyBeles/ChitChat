@@ -20,6 +20,8 @@ class FirebaseManager {
     private val _currentUser = MutableLiveData<User>()
     val currentUser: LiveData<User> get() = _currentUser
 
+
+
     init{
         addSnapshotListenerForCurrentUser()
     }
@@ -55,6 +57,24 @@ class FirebaseManager {
                 Log.e("Firebase", "Failed to add user")
             }
     }
+
+    fun getFriends() : LiveData<List<User>> {
+        val friendList = MutableLiveData<List<User>>()
+        db.collection("users").addSnapshotListener { querySnapshot, exception ->
+            if (exception != null) {
+                Log.e("Firebase", "Listen failed.", exception)
+                return@addSnapshotListener
+            }
+
+            if (querySnapshot != null && !querySnapshot.isEmpty) {
+                val friends = querySnapshot.toObjects(User::class.java)
+                friendList.value = friends
+            }
+        }
+        return friendList
+    }
+
+
 
 
 }
