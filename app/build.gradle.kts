@@ -57,6 +57,8 @@ dependencies {
     implementation(libs.androidx.core.splashscreen)
 
 
+    //  Lottie for Android
+    implementation (libs.lottie)
 
     //  For loading GIFs with coil
     implementation(libs.coil.compose)
