@@ -54,7 +54,7 @@ class FriendsFragment : Fragment() {
             }
         }
 
-        binding.fabAddFriends.setOnClickListener {
+        binding.fabAddFriends?.setOnClickListener {
             showAddFriend()
         }
     }
