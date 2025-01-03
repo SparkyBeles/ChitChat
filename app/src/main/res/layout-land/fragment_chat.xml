@@ -7,29 +7,31 @@
     android:layout_height="match_parent"
     tools:context=".ChatFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/chatRecycler"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:listitem="@layout/chat_item" />
 
-    <EditText
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/chatRecycler"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            tools:listitem="@layout/chat_item" />
+
+        <EditText
             android:id="@+id/tMessage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="170dp"
             android:ems="10"
-            android:hint="@string/message2"
-            android:layout_marginTop="310dp"
-            app:layout_constraintBottom_toBottomOf="@+id/chatRecycler"
+            android:hint="@string/message"
+            app:layout_constraintTop_toBottomOf="@+id/chatRecycler"
             android:inputType="text" />
 
     <Button
         android:id="@+id/bSend"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/send1"
-        android:layout_marginTop="370dp"
-        app:layout_constraintBottom_toBottomOf="@+id/tMessage" />
+        android:layout_marginTop="220dp"
+        android:layout_marginBottom="10dp"
+        android:text="@string/send"
+        app:layout_constraintTop_toBottomOf="@+id/tMessage" />
 
 
 </FrameLayout>

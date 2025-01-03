@@ -11,4 +11,12 @@
     <string name="create_account">Skapa konto</string>
     <string name="please_enter_your_name">Skriv ditt namn</string>
     <string name="create_an_account">Skapa konto</string>
+    <string name="friends">Vänner</string>
+    <string name="recent_chat">Historik</string>
+    <string name="sign_out">Logga ut</string>
+    <string name="message">Meddelande</string>
+    <string name="send">Skicka</string>
+    <string name="recentchat">Historik</string>
+
+
 </resources>
