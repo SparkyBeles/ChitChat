@@ -1,4 +1,4 @@
-package com.example.chitchat
+package com.example.chitchat.View
 
 import android.os.Bundle
 import android.util.Log
@@ -10,6 +10,9 @@ import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.chitchat.R
+import com.example.chitchat.Model.User
+import com.example.chitchat.ViewModel.ChatViewModel
 import com.example.chitchat.databinding.FragmentFriendsBinding
 import com.google.firebase.auth.FirebaseAuth
 

@@ -1,4 +1,4 @@
-package com.example.chitchat
+package com.example.chitchat.View
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,11 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import com.example.chitchat.ViewModel.ChatViewModel
 import com.example.chitchat.databinding.FragmentSignInBinding
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
-import com.google.firebase.auth.FirebaseAuthInvalidUserException
 import com.google.firebase.auth.auth
 
 class SignInFragment : Fragment() {

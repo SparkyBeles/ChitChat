@@ -6,11 +6,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/main_background_1"
-    tools:context=".MainActivity">
+    tools:context=".View.MainActivity">
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/authFrame"
-        android:name="com.example.chitchat.SignUpFragment"
+        android:name="com.example.chitchat.View.SignUpFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"

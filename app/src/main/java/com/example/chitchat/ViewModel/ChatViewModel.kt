@@ -1,9 +1,11 @@
-package com.example.chitchat
+package com.example.chitchat.ViewModel
 
-import android.icu.util.Currency
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.chitchat.Model.FirebaseManager
+import com.example.chitchat.Model.Message
+import com.example.chitchat.Model.User
 
 class ChatViewModel : ViewModel() {
 
