@@ -5,12 +5,20 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.Toast
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import com.example.chitchat.Model.User
 import com.example.chitchat.ViewModel.ChatViewModel
 import com.example.chitchat.databinding.FragmentProfileBinding
+import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.auth
 
 class ProfileFragment : Fragment() {
+
+    var auth: FirebaseAuth = Firebase.auth
     private var _binding: FragmentProfileBinding? =
         null
     private val binding get() = _binding!!
@@ -27,9 +35,15 @@ class ProfileFragment : Fragment() {
             container,
             false
         )
-binding.signOut.setOnClickListener {
-    signOut()
-}
+        binding.signOut.setOnClickListener {
+            signOut()
+        }
+
+     //   binding.tvUserName = current user name
+ //   binding.etName = current user name
+ //   binding.etEmail = current email
+
+
 
         return binding.root
     }
@@ -45,7 +59,7 @@ binding.signOut.setOnClickListener {
         auth.signOut()
         if (auth.currentUser == null) {
             activity?.finish()
-             Toast.makeText(activity, "You're signed out", Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity, "You're signed out", Toast.LENGTH_SHORT).show()
 
         }
     }
