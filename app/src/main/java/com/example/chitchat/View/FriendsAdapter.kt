@@ -12,7 +12,7 @@ import com.example.chitchat.Model.User
 class FriendsAdapter(
     private val context: Context,
     private val friends: List<User>,
-    private val onClick: (User) -> Unit
+    private val onFriendClick: (User) -> Unit // call back function for when a friend is clicked
 ) : RecyclerView.Adapter<FriendsAdapter.FriendViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FriendViewHolder {
@@ -24,7 +24,8 @@ class FriendsAdapter(
         val friend = friends[position]
         holder.bind(friend)
         holder.itemView.setOnClickListener {
-            onClick(friend)
+            // Call the callback function when a friend is clicked, send the friend as argument
+            onFriendClick(friend)
         }
     }
 

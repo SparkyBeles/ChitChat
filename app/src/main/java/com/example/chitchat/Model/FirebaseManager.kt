@@ -60,42 +60,83 @@ class FirebaseManager {
 
 
 
+//    fun getFriends(userId: String, callback: (List<User>) -> Unit) {
+//        db.collection("users")
+//            .document(userId)
+//            .get()
+//            .addOnSuccessListener { document ->
+//                if (document != null && document.exists()) {
+//                    val friendIds = document.get("friends") as? List<String> ?: emptyList()
+//                    Log.d("Firebase", "Friend IDs: $friendIds")
+//
+//                    if (friendIds.isEmpty()) {
+//                        callback(emptyList())
+//                        return@addOnSuccessListener
+//                    }
+//
+//                    db.collection("users")
+//                        .whereIn("id", friendIds)
+//                        .get()
+//                        .addOnSuccessListener { result ->
+//                            val friends = result.documents.mapNotNull { doc ->
+//                                doc.toObject(User::class.java)
+//                            }
+//                            Log.d("Firebase", "Fetched friends: $friends")
+//                            callback(friends)
+//                        }
+//                        .addOnFailureListener { e ->
+//                            Log.e("Firebase", "Error fetching friend details", e)
+//                            callback(emptyList())
+//                        }
+//                } else {
+//                    Log.e("Firebase", "No document found for user: $userId")
+//                    callback(emptyList())
+//                }
+//            }
+//            .addOnFailureListener { e ->
+//                Log.e("Firebase", "Error fetching user document", e)
+//                callback(emptyList())
+//            }
+//    }
+
     fun getFriends(userId: String, callback: (List<User>) -> Unit) {
         db.collection("users")
             .document(userId)
-            .get()
-            .addOnSuccessListener { document ->
-                if (document != null && document.exists()) {
-                    val friendIds = document.get("friends") as? List<String> ?: emptyList()
+            .addSnapshotListener { documentSnapshot, exception ->
+                if (exception != null) {
+                    Log.e("Firebase", "Error fetching user document", exception)
+                    callback(emptyList())
+                    return@addSnapshotListener
+                }
+
+                if (documentSnapshot != null && documentSnapshot.exists()) {
+                    val friendIds = documentSnapshot.get("friends") as? List<String> ?: emptyList()
                     Log.d("Firebase", "Friend IDs: $friendIds")
 
                     if (friendIds.isEmpty()) {
                         callback(emptyList())
-                        return@addOnSuccessListener
+                        return@addSnapshotListener
                     }
 
                     db.collection("users")
                         .whereIn("id", friendIds)
-                        .get()
-                        .addOnSuccessListener { result ->
-                            val friends = result.documents.mapNotNull { doc ->
-                                doc.toObject(User::class.java)
+                        .addSnapshotListener { querySnapshot, exception ->
+                            if (exception != null) {
+                                Log.e("Firebase", "Error fetching friend details", exception)
+                                callback(emptyList())
+                                return@addSnapshotListener
                             }
+
+                            val friends = querySnapshot?.documents?.mapNotNull { doc ->
+                                doc.toObject(User::class.java)
+                            } ?: emptyList()
                             Log.d("Firebase", "Fetched friends: $friends")
                             callback(friends)
-                        }
-                        .addOnFailureListener { e ->
-                            Log.e("Firebase", "Error fetching friend details", e)
-                            callback(emptyList())
                         }
                 } else {
                     Log.e("Firebase", "No document found for user: $userId")
                     callback(emptyList())
                 }
-            }
-            .addOnFailureListener { e ->
-                Log.e("Firebase", "Error fetching user document", e)
-                callback(emptyList())
             }
     }
 
@@ -126,4 +167,51 @@ class FirebaseManager {
                 onFriendAdded(false)
             }
     }
+
+
+    // Creating a chat collection with unique ID for currentUser and another user if one doesn't already exist.
+    // Takes in friendId and currentUserId and has a callback function that returns the chat collection ID to ChatFragment.
+    fun createChatCollectionIfNeeded(friendId: String, currentUserId: String?, callback: (String?) -> Unit) {
+
+        // Calls the helper function to create the chat collection ID.
+        val chatCollectionId = createChatCollectionId(friendId, currentUserId ?: "")
+
+        // Creating a reference to the chat collection.
+        db.collection("chats").document(chatCollectionId)
+            .get()
+            .addOnSuccessListener { document ->
+                // Checks if the chat collection already exists, if it does, returns the chat collection ID.
+                if(document != null && document.exists()) {
+                    callback(chatCollectionId)
+                } else {
+                    // Chat collection does not exist, create it and return the chat collection ID.
+                    db.collection("chats").document(chatCollectionId)
+                        .set(mapOf("users" to listOf(friendId, currentUserId)))
+                        .addOnSuccessListener {
+                            Log.d("CHAT", "Chat collection created successfully")
+                            callback(chatCollectionId)
+                        }
+                        .addOnFailureListener { e ->
+                            Log.e("CHAT", "Error creating chat collection", e)
+                            callback(null) // Returns null if error.
+                        }
+                }
+            }
+            .addOnFailureListener { e ->
+                Log.e("CHAT", "Error checking chat collection", e)
+                callback(null) // Returns null if error.
+            }
+    }
+
+
+    // Creates a unique chat collection ID for two users based on their IDs.
+    private fun createChatCollectionId(userId1 : String, userId2 : String) : String {
+        return if (userId1 < userId2) {
+            "$userId1-$userId2"
+        } else {
+            "$userId2-$userId1"
+        }
+    }
+
+
 }
