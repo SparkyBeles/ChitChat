@@ -4,10 +4,7 @@
         android:id="@+id/person"
         android:title="Friends"
         android:icon="@drawable/profile_2user"/>
-    <item
-        android:id="@+id/chat"
-        android:icon="@drawable/message_text"
-        android:title="Chat" />
+
     <item
         android:id="@+id/profile"
         android:icon="@drawable/user"

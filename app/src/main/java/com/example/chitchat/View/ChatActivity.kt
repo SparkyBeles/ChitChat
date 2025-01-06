@@ -38,10 +38,7 @@ class ChatActivity : AppCompatActivity() {
         val bottomnav = findViewById<BottomNavigationView>(R.id.bottomNavigationView) //binding doesn't work
         bottomnav.setOnItemSelectedListener { item ->
             when(item.itemId) {
-                R.id.chat -> {
-                    showChatFragment()
-                    true
-                }
+
                 R.id.person -> {
                     showFriendsListFragment()
                     true
