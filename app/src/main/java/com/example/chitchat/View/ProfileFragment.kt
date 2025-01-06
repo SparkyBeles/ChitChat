@@ -64,19 +64,20 @@ class ProfileFragment : Fragment() {
     }
 
     private fun saveUser(){
-        val updateName = binding.etName?.text.toString().trim()
-        val updateEmail = binding.etEmail?.text.toString().trim()
+        val newName = binding.etName?.text.toString().trim()
+        val newEmail = binding.etEmail?.text.toString().trim()
 
-        if (updateName.isEmpty() || updateEmail.isEmpty()){
+        if (newName.isEmpty() || newEmail.isEmpty()){
             Toast.makeText(requireContext(), "Name and Email can't be empty", Toast.LENGTH_SHORT).show()
             return
         }
 
-        if (!validEmailCheck(updateEmail)) {
+        if (!validEmailCheck(newEmail)) {
             Toast.makeText(requireContext(), "Invalid Email!", Toast.LENGTH_SHORT).show()
+            return
         }
 
-        firebaseManager.updateUser(userId, updateName, updateEmail) { success ->
+        firebaseManager.updateUser(userId, newName, newEmail) { success ->
             if (success){
                 Toast.makeText(requireContext(), "Update successfull!", Toast.LENGTH_SHORT).show()
             } else{
