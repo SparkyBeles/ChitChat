@@ -25,6 +25,8 @@ class FriendsFragment : Fragment() {
     private lateinit var viewModel: ChatViewModel
     private lateinit var friendList: MutableList<User>
     private lateinit var adapter: FriendsAdapter
+    private var receiverId : String? = null // Receiver's ID when a friend is clicked.
+    val currentUserId = FirebaseAuth.getInstance().currentUser?.uid
 
 
     override fun onCreateView(
@@ -42,18 +44,33 @@ class FriendsFragment : Fragment() {
 
         friendList = mutableListOf()
         adapter = FriendsAdapter(requireContext(), friendList) { friend ->
-//            openChatFragment(friend)
+            // Callback function when a friend is clicked
+            receiverId = friend.id // Set the receiverId to the clicked friend's ID
+
+            // call openChat function in viewModel, which in turn calls createChatCollectionIfNeeded in FirebaseManager.
+            // uses id from friend and currentUser to create chat collection with unique ID.
+            viewModel.openChat(friend.id, currentUserId ?: "") //
         }
         binding.friendsRecycler.layoutManager = LinearLayoutManager(requireContext())
         binding.friendsRecycler.adapter = adapter
 
-        val currentUserId = FirebaseAuth.getInstance().currentUser?.uid
+
         if (currentUserId != null) {
             viewModel.loadFriends(currentUserId).observe(viewLifecycleOwner) { friends ->
                 Log.d("FriendsFragment", "Friends loaded: ${friends.size} friends found")
                 friendList.clear()
                 friendList.addAll(friends)
                 adapter.notifyDataSetChanged()
+            }
+        }
+
+
+        // Observe if chatCollectionId has been updated/set in viewModel.
+        viewModel.chatCollectionId.observe(viewLifecycleOwner) { chatCollectionId ->
+            if (chatCollectionId != null) {
+                // Chat collection ID has been set, open the ChatFragment
+                // Send the two arguments for ChatFragment to open.
+                openChatFragment(chatCollectionId, receiverId!!)
             }
         }
 
@@ -86,6 +103,17 @@ class FriendsFragment : Fragment() {
             .create()
 
         dialog.show()
+    }
+
+
+    // Creates a ChatFragment that takes in two arguments.
+    private fun openChatFragment(chatCollectionId:String, receiverId:String) {
+        val chatFragment = ChatFragment.newInstance(chatCollectionId, receiverId)
+        parentFragmentManager.beginTransaction().apply{
+            replace(R.id.friendsOrChat, chatFragment)
+            addToBackStack(null)
+            commit()
+        }
     }
 
 
