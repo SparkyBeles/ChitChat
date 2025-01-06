@@ -14,6 +14,10 @@ class ChatViewModel : ViewModel() {
     val friends : LiveData<List<User>> = MutableLiveData()
     val messages = MutableLiveData<List<Message>>()
     val addFriendStatus = MutableLiveData<Boolean>()
+    val activeFragment = MutableLiveData<String>("SignInFragment")
+    val activeFragment2= MutableLiveData<String>("Friends") // Default fragment
+
+
 
     // Livedata for chat collection ID. When updated, ChatFragment is opened from FriendsFragment.
     private val _chatCollectionId = MutableLiveData<String?>()
