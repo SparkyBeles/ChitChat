@@ -1,4 +1,4 @@
-package com.example.chitchat
+package com.example.chitchat.Model
 
 data class Message (
     val id: String = "",

@@ -1,4 +1,4 @@
-package com.example.chitchat
+package com.example.chitchat.View
 
 import android.os.Bundle
 import android.util.Log
@@ -7,8 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.FragmentManager
-import com.example.chitchat.databinding.FragmentSignInBinding
+import com.example.chitchat.Model.FirebaseManager
+import com.example.chitchat.R
+import com.example.chitchat.Model.User
 import com.example.chitchat.databinding.FragmentSignUpBinding
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth

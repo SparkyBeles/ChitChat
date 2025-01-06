@@ -10,6 +10,7 @@ gradle.xml
 /misc.xml
 /runConfigurations.xml
 /vcs.xml
+appInsightsSettings.xml
 
 
 # Gradle

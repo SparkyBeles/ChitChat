@@ -1,4 +1,4 @@
-package com.example.chitchat
+package com.example.chitchat.View
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.chitchat.databinding.FragmentChatBinding
-import com.google.firebase.Firebase
 
 
 class ChatFragment : Fragment() {

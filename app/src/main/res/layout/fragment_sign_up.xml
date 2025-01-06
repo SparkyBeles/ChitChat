@@ -5,7 +5,7 @@
     android:id="@+id/signUpBtn"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SignInFragment">
+    tools:context=".View.SignInFragment">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,9 +16,11 @@
             android:id="@+id/signUpFragmentBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="15dp"
             android:layout_marginBottom="30dp"
+            android:background="@drawable/custom_signin_button"
             android:text="@string/create_account"
+            android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -28,33 +30,35 @@
             android:id="@+id/emailEt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/custom_email_input"
             android:ems="10"
             android:gravity="center"
             android:hint="@string/email"
             android:inputType="textEmailAddress"
+            android:textColor="@color/white"
             android:textColorHint="#ADFFFFFF"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/userNameEd"
-            android:textColor="@color/white"/>
+            app:layout_constraintTop_toBottomOf="@+id/userNameEd" />
 
         <EditText
             android:id="@+id/passwordEt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/custom_password_input"
             android:ems="10"
             android:gravity="center"
             android:hint="@string/password"
             android:inputType="textPassword"
+            android:textColor="@color/white"
             android:textColorHint="#ADFFFFFF"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/emailEt"
-            android:textColor="@color/white"/>
+            app:layout_constraintTop_toBottomOf="@+id/emailEt" />
 
         <EditText
             android:id="@+id/userNameEd"
@@ -64,6 +68,7 @@
             android:ems="10"
             android:gravity="center"
             android:hint="@string/please_enter_your_name"
+            android:background="@drawable/custom_input"
             android:inputType="text"
             android:textColor="@color/white"
             android:textColorHint="#ADFFFFFF"
