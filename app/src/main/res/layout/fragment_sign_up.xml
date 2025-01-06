@@ -53,7 +53,7 @@
             >
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/passwordEt1"
+                android:id="@+id/passwordEt2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/custom_password_input"
@@ -72,7 +72,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/emailEt1"
+                android:id="@+id/emailEt2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/custom_email_input"
