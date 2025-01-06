@@ -23,8 +23,10 @@ class SignUpFragment : Fragment() {
 
 
     override fun onCreateView(
+
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
+
     ): View? {
         _binding = FragmentSignUpBinding.inflate(
             inflater,
@@ -41,6 +43,7 @@ class SignUpFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
     }
 
     fun signUp() {
