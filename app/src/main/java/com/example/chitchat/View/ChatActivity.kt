@@ -93,7 +93,7 @@ class ChatActivity : AppCompatActivity() {
 fun showProfileFragment() {
     val profileFragment = ProfileFragment()
     val transaction = supportFragmentManager.beginTransaction()
-    transaction.replace(R.id.friendsOrChat, profileFragment, "Friends")
+    transaction.replace(R.id.friendsOrChat, profileFragment, "Profile")
     transaction.commit()
 }
     fun showFriendsListFragment() {
