@@ -9,6 +9,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.ViewModelProvider
 import com.example.chitchat.databinding.ActivityChatBinding
 import com.example.chitchat.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -18,6 +19,7 @@ import com.google.firebase.auth.auth
 
 class ChatActivity : AppCompatActivity() {
     lateinit var binding: ActivityChatBinding
+    lateinit var vm: ChatViewModel
     lateinit var chatButton: Button
     lateinit var friendsButton: Button
     lateinit var signOutButton: Button
@@ -30,6 +32,9 @@ class ChatActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
+        vm = ViewModelProvider(this).get(ChatViewModel::class.java)
+
         setContentView(R.layout.activity_chat)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -41,10 +46,12 @@ class ChatActivity : AppCompatActivity() {
         bottomnav.setOnItemSelectedListener { item ->
             when(item.itemId) {
                 R.id.chat -> {
+                    vm.activeFragment2.value = "Chat" // added for rotation reminding
                     showChatFragment()
                     true
                 }
                 R.id.person -> {
+                    vm.activeFragment2.value = "Friends" // added for rotation reminding
                     showFriendsListFragment()
                     true
                 }
@@ -54,6 +61,19 @@ class ChatActivity : AppCompatActivity() {
                 }
                 else -> false
             }
+        }
+
+        // Observe active fragment
+        vm.activeFragment2.observe(this) { fragmentTag ->
+            when (fragmentTag) {
+                "Friends" -> showFriendsListFragment()
+                "Chat" -> showChatFragment()
+            }
+        }
+
+        // Initilize fragment from start
+        if (savedInstanceState == null) {
+            vm.activeFragment2.value = "Friends" // default fragment
         }
 //        chatButton = findViewById(R.id.chatButton)
 //
@@ -76,18 +96,23 @@ class ChatActivity : AppCompatActivity() {
 
 
     fun showFriendsListFragment() {
-        val friendsListFragment = FriendsFragment()
-        val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.friendsOrChat, friendsListFragment, "Friends")
-        transaction.commit()
+        val existingFragment = supportFragmentManager.findFragmentByTag("Friends")
+        if (existingFragment == null) {
+            val friendsListFragment = FriendsFragment()
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.friendsOrChat, friendsListFragment, "Friends")
+                .commit()
+        }
     }
 
     fun showChatFragment() {
-        val chatFragment = ChatFragment()
-        val bundle = Bundle()
-        val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.friendsOrChat, chatFragment, "Chat")
-        transaction.commit()
+        val existingFragment = supportFragmentManager.findFragmentByTag("Chat")
+        if (existingFragment == null) {
+            val chatFragment = ChatFragment()
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.friendsOrChat, chatFragment, "Chat")
+                .commit()
+        }
     }
 
     fun signOut() {

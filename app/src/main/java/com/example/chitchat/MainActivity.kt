@@ -36,15 +36,32 @@ class MainActivity : AppCompatActivity() {
 
         vm = ViewModelProvider(this).get(ChatViewModel::class.java)
 
+        // Observe active fragment
+        vm.activeFragment.observe(this) { fragmentTag ->
+            when (fragmentTag) {
+                "SignInFragment" -> showSignInFragment()
+                "SignUpFragment" -> showSignUpFragment()
+            }
+        }
+
+        // Initiate first fragment when app starts
+        if (savedInstanceState == null) {
+            showSignInFragment() // Standard
+            vm.activeFragment.value = "SignInFragment"
+        }
+
         showSignInFragment()
         binding.signUpBtn.setOnClickListener {
             showSignUpFragment()
+            vm.activeFragment.value = "SignUpFragment" // vm help remeber fragment in land or standing mode
         }
 
 
         binding.signInBtn.setOnClickListener {
             showSignInFragment()
+            vm.activeFragment.value = "SignInFragment" // vm help remeber fragment in land or standing mode
         }
+
 
         vm.startChat.observe(this) { startChat ->
             if (startChat) {
@@ -62,17 +79,25 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun showSignInFragment() {
-        val signInFragment = SignInFragment()
-        val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.authFrame, signInFragment, "SignInFragment")
-        transaction.commit()
+        val existingFragment = supportFragmentManager.findFragmentByTag("SignInFragment")
+        if (existingFragment == null) {
+            val signInFragment = SignInFragment()
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.authFrame, signInFragment, "SignInFragment")
+                .addToBackStack(null)
+                .commit()
+        }
     }
 
     fun showSignUpFragment() {
-        val signUpFragment = SignUpFragment()
-        val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.authFrame, signUpFragment, "SignUpFragment")
-        transaction.commit()
+        val existingFragment = supportFragmentManager.findFragmentByTag("SignUpFragment")
+        if (existingFragment == null) {
+            val signUpFragment = SignUpFragment()
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.authFrame, signUpFragment, "SignUpFragment")
+                .addToBackStack(null)
+                .commit()
+        }
     }
 
 }
