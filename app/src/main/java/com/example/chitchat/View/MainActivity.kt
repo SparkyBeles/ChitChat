@@ -7,6 +7,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import com.example.chitchat.R
 import com.example.chitchat.ViewModel.ChatViewModel
@@ -52,14 +53,18 @@ class MainActivity : AppCompatActivity() {
         }
 
         showSignInFragment()
+
         binding.signUpBtn.setOnClickListener {
+            binding.accountQuestion.isVisible = false
             vm.activeFragment.value = "SignUpFragment" // vm help remeber fragment in land or standing mode
             showSignUpFragment()
         }
 
 
         binding.signInBtn.setOnClickListener {
+            binding.accountQuestion.isVisible = true
             vm.activeFragment.value = "SignInFragment" // vm help remeber fragment in land or standing mode
+
             showSignInFragment()
         }
 
@@ -79,25 +84,35 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun showSignInFragment() {
+        binding.signInBtn.isEnabled = false
+        binding.signInBtn.isVisible = false
+        binding.signUpBtn.isEnabled = true
+        binding.signUpBtn.isVisible = true
         val existingFragment = supportFragmentManager.findFragmentByTag("SignInFragment")
-        if (existingFragment == null) {
+     //   if (existingFragment == null) {
             val signInFragment = SignInFragment()
             supportFragmentManager.beginTransaction()
                 .replace(R.id.authFrame, signInFragment, "SignInFragment")
                 .addToBackStack(null)
                 .commit()
-        }
+       // }
+
     }
 
     fun showSignUpFragment() {
+        binding.signInBtn.isEnabled = true
+        binding.signInBtn.isVisible = true
+        binding.signUpBtn.isEnabled = false
+        binding.signUpBtn.isVisible = false
         val existingFragment = supportFragmentManager.findFragmentByTag("SignUpFragment")
-        if (existingFragment == null) {
+       // if (existingFragment == null) {
             val signUpFragment = SignUpFragment()
             supportFragmentManager.beginTransaction()
                 .replace(R.id.authFrame, signUpFragment, "SignUpFragment")
                 .addToBackStack(null)
                 .commit()
-        }
+     //   }
+
     }
 
 }
