@@ -21,6 +21,7 @@ import com.google.firebase.auth.auth
 class ProfileFragment : Fragment() {
 
     var auth: FirebaseAuth = Firebase.auth
+
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
     val vm = ChatViewModel()
@@ -42,6 +43,7 @@ class ProfileFragment : Fragment() {
 
         loadUser()
 
+
         binding.signOut.setOnClickListener {
             signOut()
         }
@@ -60,6 +62,11 @@ class ProfileFragment : Fragment() {
 
     }
 
+
+        binding.signOut.setOnClickListener {
+            signOut()
+        }
+        binding.btnSaveChanges?.setOnClickListener {
 
 
     private fun loadUser(){

@@ -2,6 +2,7 @@ package com.example.chitchat.View
 
 import  android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -10,6 +11,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import com.example.chitchat.R
 import com.example.chitchat.ViewModel.ChatViewModel
@@ -79,6 +81,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         showSignInFragment()
+
         binding.GoogleBtn?.setOnClickListener() {
 signInWithGoogle()
         }
@@ -86,14 +89,17 @@ signInWithGoogle()
         {
             vm.activeFragment.value =
                 "SignUpFragment" // vm help remeber fragment in land or standing mode
+
             showSignUpFragment()
         }
+
 
 
         binding.signInBtn.setOnClickListener()
         {
             vm.activeFragment.value =
                 "SignInFragment" // vm help remeber fragment in land or standing mode
+
             showSignInFragment()
         }
 
@@ -114,26 +120,40 @@ signInWithGoogle()
     }
 
     fun showSignInFragment() {
+
+
         val existingFragment = supportFragmentManager.findFragmentByTag("SignInFragment")
-        if (existingFragment == null) {
+      //  if (existingFragment == null) {
             val signInFragment = SignInFragment()
             supportFragmentManager.beginTransaction()
                 .replace(R.id.authFrame, signInFragment, "SignInFragment")
                 .addToBackStack(null)
                 .commit()
-        }
+switchToSignUpButton()
+    //   }
+
     }
 
     fun showSignUpFragment() {
         val existingFragment = supportFragmentManager.findFragmentByTag("SignUpFragment")
-        if (existingFragment == null) {
+     //  if (existingFragment == null) {
             val signUpFragment = SignUpFragment()
             supportFragmentManager.beginTransaction()
                 .replace(R.id.authFrame, signUpFragment, "SignUpFragment")
                 .addToBackStack(null)
                 .commit()
-        }
+        switchToSignInButton()
+      //  }
+
+
     }
+fun switchToSignUpButton() {
+    binding.signInBtn.visibility = View.GONE
+    binding.signUpBtn.visibility = View.VISIBLE
+}
+    fun switchToSignInButton() {
+        binding.signInBtn.visibility = View.VISIBLE
+        binding.signUpBtn.visibility = View.GONE
 
     fun getClient(): GoogleSignInClient {
         val gso = GoogleSignInOptions
@@ -160,6 +180,7 @@ signInWithGoogle()
                 Log.d("!!!", "Google auth failed")
             }
         }
+
     }
 }
 
