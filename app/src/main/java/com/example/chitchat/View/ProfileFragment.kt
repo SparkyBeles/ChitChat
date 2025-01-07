@@ -19,9 +19,10 @@ import com.google.firebase.auth.auth
 class ProfileFragment : Fragment() {
 
     var auth: FirebaseAuth = Firebase.auth
-    private var _binding: FragmentProfileBinding? =
-        null
-    private val binding get() = _binding!!
+    //private var _binding: FragmentProfileBinding? =
+  //      null
+  //  private val binding get() = _binding!!
+    lateinit var binding : FragmentProfileBinding
     val vm = ChatViewModel()
     //  var auth: FirebaseAuth = Firebase.auth
 
@@ -30,13 +31,16 @@ class ProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        _binding = FragmentProfileBinding.inflate(
+        binding = FragmentProfileBinding.inflate(
             inflater,
             container,
             false
         )
-        binding.signOut.setOnClickListener {
+        binding.signOut?.setOnClickListener {
             signOut()
+        }
+        binding.btnSaveChanges?.setOnClickListener {
+
         }
 
      //   binding.tvUserName = current user name
@@ -51,7 +55,12 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.signOut.setOnClickListener {
+            signOut()
+        }
+        binding.btnSaveChanges?.setOnClickListener {
 
+        }
     }
 
     fun signOut() {
