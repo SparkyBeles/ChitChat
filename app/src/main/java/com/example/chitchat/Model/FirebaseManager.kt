@@ -187,10 +187,9 @@ class FirebaseManager {
             }
     }
 
-    fun updateUser(userId: String, name: String, email: String, callback: (Boolean) -> Unit) {
+    fun updateUser(userId: String, name: String, callback: (Boolean) -> Unit) {
         val updatedUser = mapOf(
             "name" to name,
-            "email" to email
         )
 
         db.collection("users")

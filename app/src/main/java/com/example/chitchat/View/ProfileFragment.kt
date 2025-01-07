@@ -56,7 +56,6 @@ class ProfileFragment : Fragment() {
         firebaseManager.getCurrentUser(userId) { user ->
             user?.let {
                 binding.etName?.setText(it.name)
-                binding.etEmail?.setText(it.email)
             } ?: run {
                 Toast.makeText(requireContext(), "Failed to find user", Toast.LENGTH_SHORT).show()
             }
@@ -65,19 +64,13 @@ class ProfileFragment : Fragment() {
 
     private fun saveUser(){
         val newName = binding.etName?.text.toString().trim()
-        val newEmail = binding.etEmail?.text.toString().trim()
 
-        if (newName.isEmpty() || newEmail.isEmpty()){
-            Toast.makeText(requireContext(), "Name and Email can't be empty", Toast.LENGTH_SHORT).show()
+        if (newName.isEmpty()){
+            Toast.makeText(requireContext(), "Name can't be empty", Toast.LENGTH_SHORT).show()
             return
         }
 
-        if (!validEmailCheck(newEmail)) {
-            Toast.makeText(requireContext(), "Invalid Email!", Toast.LENGTH_SHORT).show()
-            return
-        }
-
-        firebaseManager.updateUser(userId, newName, newEmail) { success ->
+        firebaseManager.updateUser(userId, newName) { success ->
             if (success){
                 Toast.makeText(requireContext(), "Update successfull!", Toast.LENGTH_SHORT).show()
             } else{
@@ -86,9 +79,6 @@ class ProfileFragment : Fragment() {
         }
     }
 
-    private fun validEmailCheck(email: String): Boolean{
-        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
-    }
 
     fun signOut() {
         val auth = FirebaseAuth.getInstance()
