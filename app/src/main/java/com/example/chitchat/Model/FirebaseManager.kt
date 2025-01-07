@@ -13,13 +13,8 @@ import com.google.firebase.firestore.toObject
 class FirebaseManager {
     private val db = Firebase.firestore
     private val auth = FirebaseAuth.getInstance()
-
-//    private val _users = MutableLiveData(mutableListOf<User>())
-//    val users: LiveData<MutableList<User>> get() = _users
-
     private val _currentUser = MutableLiveData<User>()
     val currentUser: LiveData<User> get() = _currentUser
-
 
 
     init{
@@ -204,4 +199,41 @@ class FirebaseManager {
                 callback(false)
             }
     }
+
+    fun getAllMessages(chatCollectionId: String, callback: (List<Message>) -> Unit) {
+        val messagesCollectionRef = db // Define messagesCollectionRef
+            .collection("chats")
+            .document(chatCollectionId ?: "")
+            .collection("messages")
+
+        messagesCollectionRef.orderBy("timestamp").addSnapshotListener { snapshot, exception ->
+            if(exception != null) {
+                return@addSnapshotListener
+            }
+
+            // Fetch new messages and add them to the list.
+            // The callback function is called with the new messages.
+            val newMessages = snapshot?.toObjects(Message::class.java) ?: emptyList()
+            callback(newMessages)
+        }
+    }
+
+
+    // Function to store message sent in ChatFragment in Firebase.
+    // Callback function is called when message is sent, if true, message is sent, if false, fail.
+    fun sendMessage(chatCollectionId: String, message: Message, callback: (Boolean) -> Unit) {
+        db.collection("chats")
+            .document(chatCollectionId)
+            .collection("messages")
+            .add(message)
+            .addOnSuccessListener {
+                callback(true)
+            }
+            .addOnFailureListener { e ->
+                Log.e("Firebase", "Error sending message", e)
+                callback(false)
+            }
+    }
+
+
 }
