@@ -47,6 +47,7 @@ class ChatActivity : AppCompatActivity() {
             return@setOnApplyWindowInsetsListener CONSUMED //whole ViewCompat has been changed for bottomnavbar
         }
         showFriendsListFragment()
+
         val bottomnav = findViewById<BottomNavigationView>(R.id.bottomNavigationView) //binding doesn't work
         bottomnav.setOnItemSelectedListener { item ->
             when(item.itemId) {

@@ -12,17 +12,38 @@ class ChatViewModel : ViewModel() {
     val startChat = MutableLiveData<Boolean>()
     private val firebaseManager = FirebaseManager()
     val friends : LiveData<List<User>> = MutableLiveData()
-    val messages = MutableLiveData<List<Message>>()
     val addFriendStatus = MutableLiveData<Boolean>()
     val activeFragment = MutableLiveData<String>("SignInFragment")
     val activeFragment2= MutableLiveData<String>("Friends") // Default fragment
-
-
 
     // Livedata for chat collection ID. When updated, ChatFragment is opened from FriendsFragment.
     private val _chatCollectionId = MutableLiveData<String?>()
     val chatCollectionId: LiveData<String?> = _chatCollectionId
 
+    private val _currentUser = MutableLiveData<User?>()
+    val currentUser: LiveData<User?> = _currentUser
+
+    private val _messages = MutableLiveData<List<Message>>()
+    val messages: LiveData<List<Message>> = _messages
+
+    fun fetchCurrentUser(userId: String) {
+        firebaseManager.getCurrentUser(userId) { user ->
+            _currentUser.postValue(user)
+        }
+    }
+
+    fun getAllMessages(chatCollectionId: String) {
+        firebaseManager.getAllMessages(chatCollectionId) { messages ->
+            _messages.postValue(messages)
+        }
+    }
+
+    // Function to send a message in ChatFragment.
+    fun sendMessage(chatCollectionId: String, message: Message, callback: (Boolean) -> Unit) {
+        firebaseManager.sendMessage(chatCollectionId, message) { success ->
+            callback(success)
+        }
+    }
 
     fun loadFriends(userId: String): LiveData<List<User>> {
         val friendsLiveData = MutableLiveData<List<User>>()
