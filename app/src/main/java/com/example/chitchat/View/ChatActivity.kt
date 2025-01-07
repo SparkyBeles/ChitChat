@@ -1,12 +1,15 @@
 package com.example.chitchat.View
 
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsCompat.CONSUMED
+import androidx.core.view.updatePadding
 import androidx.lifecycle.ViewModelProvider
 import com.example.chitchat.R
 import com.example.chitchat.ViewModel.ChatViewModel
@@ -35,12 +38,16 @@ class ChatActivity : AppCompatActivity() {
         vm = ViewModelProvider(this).get(ChatViewModel::class.java)
 
         setContentView(R.layout.activity_chat)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+        ViewCompat.setOnApplyWindowInsetsListener( // Attention!
+            window.decorView
+        ) { v, insets ->
+            val windowInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            findViewById<View>(R.id.main).updatePadding(bottom = windowInsets.bottom)
+
+            return@setOnApplyWindowInsetsListener CONSUMED //whole ViewCompat has been changed for bottomnavbar
         }
         showFriendsListFragment()
+
         val bottomnav = findViewById<BottomNavigationView>(R.id.bottomNavigationView) //binding doesn't work
         bottomnav.setOnItemSelectedListener { item ->
             when(item.itemId) {
@@ -93,7 +100,7 @@ class ChatActivity : AppCompatActivity() {
 fun showProfileFragment() {
     val profileFragment = ProfileFragment()
     val transaction = supportFragmentManager.beginTransaction()
-    transaction.replace(R.id.friendsOrChat, profileFragment, "Friends")
+    transaction.replace(R.id.friendsOrChat, profileFragment, "Profile")
     transaction.commit()
 }
     fun showFriendsListFragment() {

@@ -46,8 +46,8 @@ class SignUpFragment : Fragment() {
 
     fun signUp() {
         val name = binding.userNameEd1?.text.toString()
-        val email = binding.emailEt?.text.toString()
-        val password = binding.passwordEt?.text.toString()
+        val email = binding.emailEt2?.text.toString()
+        val password = binding.passwordEt2?.text.toString()
 
         if (name.isEmpty() || email.isEmpty() || password.isEmpty()) {
             return

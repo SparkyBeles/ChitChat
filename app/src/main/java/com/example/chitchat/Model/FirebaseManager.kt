@@ -13,13 +13,8 @@ import com.google.firebase.firestore.toObject
 class FirebaseManager {
     private val db = Firebase.firestore
     private val auth = FirebaseAuth.getInstance()
-
-//    private val _users = MutableLiveData(mutableListOf<User>())
-//    val users: LiveData<MutableList<User>> get() = _users
-
     private val _currentUser = MutableLiveData<User>()
     val currentUser: LiveData<User> get() = _currentUser
-
 
 
     init{
@@ -58,46 +53,6 @@ class FirebaseManager {
             }
     }
 
-
-
-//    fun getFriends(userId: String, callback: (List<User>) -> Unit) {
-//        db.collection("users")
-//            .document(userId)
-//            .get()
-//            .addOnSuccessListener { document ->
-//                if (document != null && document.exists()) {
-//                    val friendIds = document.get("friends") as? List<String> ?: emptyList()
-//                    Log.d("Firebase", "Friend IDs: $friendIds")
-//
-//                    if (friendIds.isEmpty()) {
-//                        callback(emptyList())
-//                        return@addOnSuccessListener
-//                    }
-//
-//                    db.collection("users")
-//                        .whereIn("id", friendIds)
-//                        .get()
-//                        .addOnSuccessListener { result ->
-//                            val friends = result.documents.mapNotNull { doc ->
-//                                doc.toObject(User::class.java)
-//                            }
-//                            Log.d("Firebase", "Fetched friends: $friends")
-//                            callback(friends)
-//                        }
-//                        .addOnFailureListener { e ->
-//                            Log.e("Firebase", "Error fetching friend details", e)
-//                            callback(emptyList())
-//                        }
-//                } else {
-//                    Log.e("Firebase", "No document found for user: $userId")
-//                    callback(emptyList())
-//                }
-//            }
-//            .addOnFailureListener { e ->
-//                Log.e("Firebase", "Error fetching user document", e)
-//                callback(emptyList())
-//            }
-//    }
 
     fun getFriends(userId: String, callback: (List<User>) -> Unit) {
         db.collection("users")
@@ -211,6 +166,73 @@ class FirebaseManager {
         } else {
             "$userId2-$userId1"
         }
+    }
+
+    fun getCurrentUser(userId: String, callback: (User?) -> Unit){
+        db.collection("users")
+            .document(userId)
+            .get()
+            .addOnSuccessListener { document ->
+                val user = document.toObject(User::class.java)
+                callback(user)
+            }
+            .addOnFailureListener { e ->
+                Log.e("Firebase", "Error: $e")
+                callback(null)
+            }
+    }
+
+    fun updateUser(userId: String, name: String, callback: (Boolean) -> Unit) {
+        val updatedUser = mapOf(
+            "name" to name,
+        )
+
+        db.collection("users")
+            .document(userId)
+            .update(updatedUser)
+            .addOnSuccessListener {
+                Log.d("Firebase", "Update successfull!")
+                callback(true)
+            }
+            .addOnFailureListener { e ->
+                Log.e("Firebase", "Error: $e")
+                callback(false)
+            }
+    }
+
+    fun getAllMessages(chatCollectionId: String, callback: (List<Message>) -> Unit) {
+        val messagesCollectionRef = db // Define messagesCollectionRef
+            .collection("chats")
+            .document(chatCollectionId ?: "")
+            .collection("messages")
+
+        messagesCollectionRef.orderBy("timestamp").addSnapshotListener { snapshot, exception ->
+            if(exception != null) {
+                return@addSnapshotListener
+            }
+
+            // Fetch new messages and add them to the list.
+            // The callback function is called with the new messages.
+            val newMessages = snapshot?.toObjects(Message::class.java) ?: emptyList()
+            callback(newMessages)
+        }
+    }
+
+
+    // Function to store message sent in ChatFragment in Firebase.
+    // Callback function is called when message is sent, if true, message is sent, if false, fail.
+    fun sendMessage(chatCollectionId: String, message: Message, callback: (Boolean) -> Unit) {
+        db.collection("chats")
+            .document(chatCollectionId)
+            .collection("messages")
+            .add(message)
+            .addOnSuccessListener {
+                callback(true)
+            }
+            .addOnFailureListener { e ->
+                Log.e("Firebase", "Error sending message", e)
+                callback(false)
+            }
     }
 
 
