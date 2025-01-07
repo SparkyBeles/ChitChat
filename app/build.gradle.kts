@@ -63,4 +63,9 @@ dependencies {
     //  For loading GIFs with coil
     implementation(libs.coil.compose)
     implementation(libs.coil.network.okhttp)
+
+    //  Confetti
+    implementation(libs.konfetti.xml)
+
+
 }
