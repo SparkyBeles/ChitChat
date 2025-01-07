@@ -65,4 +65,8 @@ dependencies {
     implementation(libs.coil.network.okhttp)
 
 
+    //  Confetti
+    implementation(libs.konfetti.xml)
+
+
 }
