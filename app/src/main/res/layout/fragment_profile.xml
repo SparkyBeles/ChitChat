@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".View.ProfileFragment">
+    tools:context=".View.ProfileFragment"
+    android:id="@+id/profile">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -80,6 +81,17 @@
             android:text="Name"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvUserName" />
+
+        <Button
+            android:id="@+id/deleteButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Button"
+            app:layout_constraintBottom_toTopOf="@+id/signOut"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnSaveChanges"
+            app:layout_constraintVertical_bias="0.386" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
