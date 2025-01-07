@@ -11,6 +11,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.chitchat.Model.FirebaseManager
 import com.example.chitchat.Model.User
+import com.example.chitchat.R
 import com.example.chitchat.ViewModel.ChatViewModel
 import com.example.chitchat.databinding.FragmentProfileBinding
 import com.google.firebase.Firebase
@@ -46,6 +47,15 @@ class ProfileFragment : Fragment() {
         }
         binding.btnSaveChanges?.setOnClickListener {
             saveUser()
+        }
+
+
+        binding.deleteButton?.setOnClickListener {
+            deleteAccount()
+        }
+
+        binding.deleteButton2?.setOnClickListener {
+            deleteAccount()
         }
 
     }
@@ -89,5 +99,22 @@ class ProfileFragment : Fragment() {
 
         }
     }
+
+
+    fun deleteAccount(){
+        val user = FirebaseAuth.getInstance().currentUser
+
+        user?.delete()?.addOnCompleteListener { task ->
+            if (task.isSuccessful){
+                Toast.makeText(context,"Account Deleted!",Toast.LENGTH_SHORT).show()
+                signOut()
+
+            }
+
+        }
+
+
+    }
+
 
 }
