@@ -26,6 +26,7 @@ class FriendsFragment : Fragment() {
     private lateinit var friendList: MutableList<User>
     private lateinit var adapter: FriendsAdapter
     private var receiverId : String? = null // Receiver's ID when a friend is clicked.
+    private var receiverName : String? = null // Receiver's name when a friend is clicked.
     val currentUserId = FirebaseAuth.getInstance().currentUser?.uid
 
 
@@ -46,6 +47,7 @@ class FriendsFragment : Fragment() {
         adapter = FriendsAdapter(requireContext(), friendList) { friend ->
             // Callback function when a friend is clicked
             receiverId = friend.id // Set the receiverId to the clicked friend's ID
+            receiverName = friend.name // Set the receiverName to the clicked friend's name
 
             // call openChat function in viewModel, which in turn calls createChatCollectionIfNeeded in FirebaseManager.
             // uses id from friend and currentUser to create chat collection with unique ID.
@@ -108,7 +110,7 @@ class FriendsFragment : Fragment() {
 
     // Creates a ChatFragment that takes in two arguments.
     private fun openChatFragment(chatCollectionId:String, receiverId:String) {
-        val chatFragment = ChatFragment.newInstance(chatCollectionId, receiverId)
+        val chatFragment = ChatFragment.newInstance(chatCollectionId, receiverId, receiverName!!)
         parentFragmentManager.beginTransaction().apply{
             replace(R.id.friendsOrChat, chatFragment)
             addToBackStack(null)
@@ -116,14 +118,5 @@ class FriendsFragment : Fragment() {
         }
     }
 
-
-//    fun openChatFragment(friend: User){
-//        Log.d("FriendsFragment", "Opening chat with friend: id=${friend.id}, name=${friend.name}")
-//        val chatFragment = ChatFragment.newInstance(friend.id, friend.name)
-//        parentFragmentManager.beginTransaction()
-//            .replace(R.id.chatRecycler, chatFragment)
-//            .addToBackStack(null)
-//            .commit()
-//    }
 
 }

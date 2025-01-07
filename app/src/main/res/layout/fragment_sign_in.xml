@@ -17,10 +17,12 @@
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             android:text="@string/welcome_back"
             android:textColor="@color/white"
+
             android:textSize="60sp"
+
+            app:layout_constraintBottom_toTopOf="@+id/emailEt1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.496"
             app:layout_constraintStart_toStartOf="parent"
@@ -67,17 +69,17 @@
                 android:gravity="center"
                 android:hint="@string/email"
                 android:textColor="@color/white" />
+
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/signInFragmentBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginStart="10dp"
             android:background="@drawable/custom_signin_button"
             android:text="@string/sign_in"
             android:textColor="@color/white"
