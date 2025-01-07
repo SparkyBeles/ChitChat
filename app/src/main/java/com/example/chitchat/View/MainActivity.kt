@@ -13,6 +13,8 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
+import com.example.chitchat.Model.FirebaseManager
+import com.example.chitchat.Model.User
 import com.example.chitchat.R
 import com.example.chitchat.ViewModel.ChatViewModel
 import com.example.chitchat.databinding.ActivityMainBinding
@@ -31,6 +33,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
     lateinit var auth: FirebaseAuth // Not sure we'll need auth in main though
     lateinit var vm: ChatViewModel
+    private val firebaseManager = FirebaseManager()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -177,6 +180,15 @@ switchToSignUpButton()
         auth.signInWithCredential(credential).addOnCompleteListener {
             if (it.isSuccessful) {
                 Log.d("!!!", "Google auth success")
+                val currentUser = auth.currentUser
+                val user = User(
+                    id = currentUser?.uid ?: "",
+                    name = currentUser?.displayName ?: "",
+                    email = currentUser?.email ?: ""
+                )
+
+                firebaseManager.saveNewUser(user)
+                vm.startChat.value = true
             } else {
                 Log.d("!!!", "Google auth failed")
             }
