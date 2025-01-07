@@ -59,46 +59,6 @@ class FirebaseManager {
     }
 
 
-
-//    fun getFriends(userId: String, callback: (List<User>) -> Unit) {
-//        db.collection("users")
-//            .document(userId)
-//            .get()
-//            .addOnSuccessListener { document ->
-//                if (document != null && document.exists()) {
-//                    val friendIds = document.get("friends") as? List<String> ?: emptyList()
-//                    Log.d("Firebase", "Friend IDs: $friendIds")
-//
-//                    if (friendIds.isEmpty()) {
-//                        callback(emptyList())
-//                        return@addOnSuccessListener
-//                    }
-//
-//                    db.collection("users")
-//                        .whereIn("id", friendIds)
-//                        .get()
-//                        .addOnSuccessListener { result ->
-//                            val friends = result.documents.mapNotNull { doc ->
-//                                doc.toObject(User::class.java)
-//                            }
-//                            Log.d("Firebase", "Fetched friends: $friends")
-//                            callback(friends)
-//                        }
-//                        .addOnFailureListener { e ->
-//                            Log.e("Firebase", "Error fetching friend details", e)
-//                            callback(emptyList())
-//                        }
-//                } else {
-//                    Log.e("Firebase", "No document found for user: $userId")
-//                    callback(emptyList())
-//                }
-//            }
-//            .addOnFailureListener { e ->
-//                Log.e("Firebase", "Error fetching user document", e)
-//                callback(emptyList())
-//            }
-//    }
-
     fun getFriends(userId: String, callback: (List<User>) -> Unit) {
         db.collection("users")
             .document(userId)
@@ -213,5 +173,35 @@ class FirebaseManager {
         }
     }
 
+    fun getCurrentUser(userId: String, callback: (User?) -> Unit){
+        db.collection("users")
+            .document(userId)
+            .get()
+            .addOnSuccessListener { document ->
+                val user = document.toObject(User::class.java)
+                callback(user)
+            }
+            .addOnFailureListener { e ->
+                Log.e("Firebase", "Error: $e")
+                callback(null)
+            }
+    }
 
+    fun updateUser(userId: String, name: String, callback: (Boolean) -> Unit) {
+        val updatedUser = mapOf(
+            "name" to name,
+        )
+
+        db.collection("users")
+            .document(userId)
+            .update(updatedUser)
+            .addOnSuccessListener {
+                Log.d("Firebase", "Update successfull!")
+                callback(true)
+            }
+            .addOnFailureListener { e ->
+                Log.e("Firebase", "Error: $e")
+                callback(false)
+            }
+    }
 }
