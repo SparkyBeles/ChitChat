@@ -83,7 +83,7 @@ class MainActivity : AppCompatActivity() {
         showSignInFragment()
 
         binding.GoogleBtn?.setOnClickListener() {
-signInWithGoogle()
+        signInWithGoogle()
         }
         binding.signUpBtn.setOnClickListener()
         {
@@ -147,13 +147,14 @@ switchToSignUpButton()
 
 
     }
-fun switchToSignUpButton() {
-    binding.signInBtn.visibility = View.GONE
-    binding.signUpBtn.visibility = View.VISIBLE
-}
+    fun switchToSignUpButton() {
+        binding.signInBtn.visibility = View.GONE
+        binding.signUpBtn.visibility = View.VISIBLE
+    }
     fun switchToSignInButton() {
         binding.signInBtn.visibility = View.VISIBLE
         binding.signUpBtn.visibility = View.GONE
+    }
 
     fun getClient(): GoogleSignInClient {
         val gso = GoogleSignInOptions
@@ -183,4 +184,5 @@ fun switchToSignUpButton() {
 
     }
 }
+
 

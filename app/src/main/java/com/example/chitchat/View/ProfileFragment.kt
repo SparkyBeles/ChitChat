@@ -63,12 +63,6 @@ class ProfileFragment : Fragment() {
     }
 
 
-        binding.signOut.setOnClickListener {
-            signOut()
-        }
-        binding.btnSaveChanges?.setOnClickListener {
-
-
     private fun loadUser(){
         firebaseManager.getCurrentUser(userId) { user ->
             user?.let {
