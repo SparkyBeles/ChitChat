@@ -27,6 +27,7 @@ import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.auth
+import com.google.firebase.firestore.FirebaseFirestore
 
 class MainActivity : AppCompatActivity() {
     lateinit var launcher: ActivityResultLauncher<Intent>
@@ -88,7 +89,7 @@ class MainActivity : AppCompatActivity() {
         binding.GoogleBtn?.setOnClickListener() {
         signInWithGoogle()
         }
-        binding.signUpBtn.setOnClickListener()
+        binding.signUpBtn?.setOnClickListener()
         {
             vm.activeFragment.value =
                 "SignUpFragment" // vm help remeber fragment in land or standing mode
@@ -152,11 +153,11 @@ switchToSignUpButton()
     }
     fun switchToSignUpButton() {
         binding.signInBtn.visibility = View.GONE
-        binding.signUpBtn.visibility = View.VISIBLE
+        binding.signUpBtn?.visibility = View.VISIBLE
     }
     fun switchToSignInButton() {
         binding.signInBtn.visibility = View.VISIBLE
-        binding.signUpBtn.visibility = View.GONE
+        binding.signUpBtn?.visibility = View.GONE
     }
 
     fun getClient(): GoogleSignInClient {
@@ -179,15 +180,29 @@ switchToSignUpButton()
         val credential = GoogleAuthProvider.getCredential(idToken, null)
         auth.signInWithCredential(credential).addOnCompleteListener {
             if (it.isSuccessful) {
-                Log.d("!!!", "Google auth success")
                 val currentUser = auth.currentUser
-                val user = User(
-                    id = currentUser?.uid ?: "",
-                    name = currentUser?.displayName ?: "",
-                    email = currentUser?.email ?: ""
-                )
+                val db = FirebaseFirestore.getInstance()
+                val usersRef = db.collection("users")
+                usersRef.document(currentUser!!.uid).get()
+                    .addOnSuccessListener { document ->
+                        if (document.exists()) {
+                            Log.d("!!!","Dokumentet finns! 🎉")
+                        } else {
+                            Log.d("!!!","Dokumentet finns inte. 😢")
+                            val user = User(
+                                id = currentUser?.uid ?: "",
+                                name = currentUser?.displayName ?: "",
+                                email = currentUser?.email ?: ""
+                            )
+                            firebaseManager.saveNewUser(user)
+                        }
+                    }
+                    .addOnFailureListener { exception ->
+                        println("Något gick fel: $exception")
+                    }
+                Log.d("!!!", "Google auth success")
 
-                firebaseManager.saveNewUser(user)
+
                 vm.startChat.value = true
             } else {
                 Log.d("!!!", "Google auth failed")
