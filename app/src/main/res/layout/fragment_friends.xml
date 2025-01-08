@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/friends_background"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".View.FriendsFragment">
 
@@ -12,8 +13,9 @@
         android:layout_width="wrap_content"
         android:layout_height="70dp"
         android:layout_marginTop="30dp"
+        android:text="Friends"
+        android:textColor="#232A2E"
         android:text="@string/my_friends"
-        android:textSize="40sp"
         android:layout_gravity="top|center_horizontal"/>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -28,7 +30,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:backgroundTint="#2F4557"
+        android:backgroundTint="#232A2E"
         android:text="@string/add_friend"
         android:textColor="@color/white"
         android:layout_margin="16dp"/>
