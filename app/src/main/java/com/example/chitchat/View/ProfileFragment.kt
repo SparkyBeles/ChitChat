@@ -68,31 +68,38 @@ class ProfileFragment : Fragment() {
 
 
     private fun loadUser(userId: String){
-
-            firebaseManager.getCurrentUser(userId) { user ->
-                user?.let {
-                    binding.etName?.setText(it.name)
-                } ?: run {
-                    Toast.makeText(requireContext(), "Failed to find user", Toast.LENGTH_SHORT).show()
-                }
+        //Call the function from firebasemanager to get the user data
+        firebaseManager.getCurrentUser(userId) { user ->
+            //if user object is not null, update the username in the EditText
+            user?.let {
+                binding.etName?.setText(it.name)
+            } ?: run {
+                //if no user was found show a toast message
+                Toast.makeText(requireContext(), "Failed to find user", Toast.LENGTH_SHORT).show()
             }
+        }
     }
 
     private fun saveUser(){
+        //Save the name from the edittext to a newName variable
+        //Trim the whitespaces in the beginning and end
         val newName = binding.etName?.text.toString().trim()
 
+        //check if the Edittext is empty and if it is show toast and return out of the function
         if (newName.isEmpty()){
             Toast.makeText(requireContext(), "Name can't be empty", Toast.LENGTH_SHORT).show()
             return
         }
-            firebaseManager.updateUser(userId, newName) { success ->
+        //call for function in firebasemanager to update name of the user
+        firebaseManager.updateUser(userId, newName) { success ->
+            //Show toasts if successfull or failed
             if (success){
                 Toast.makeText(requireContext(), "Update successfull!", Toast.LENGTH_SHORT).show()
             } else{
                 Toast.makeText(requireContext(), "Update failed!", Toast.LENGTH_SHORT).show()
             }
 
-    }
+        }
 
     }
 

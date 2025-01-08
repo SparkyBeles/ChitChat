@@ -45,9 +45,9 @@ class ChatViewModel : ViewModel() {
         }
     }
 
+    //Calls firebasemanager to get friends and returns a liveData of friends
     fun loadFriends(userId: String): LiveData<List<User>> {
         val friendsLiveData = MutableLiveData<List<User>>()
-
 
         firebaseManager.getFriends(userId) { friends ->
             friendsLiveData.value = friends
@@ -55,6 +55,7 @@ class ChatViewModel : ViewModel() {
         return friendsLiveData
     }
 
+    //Calls firebasemanager to add a friend with currentUserId and email
     fun addFriend(currentUserId: String, email: String) {
         firebaseManager.addFriend(currentUserId, email){ success ->
             addFriendStatus.value = success

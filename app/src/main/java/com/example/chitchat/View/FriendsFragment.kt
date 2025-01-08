@@ -57,6 +57,7 @@ class FriendsFragment : Fragment() {
         binding.friendsRecycler.adapter = adapter
 
 
+        // Observe if friends for the currentUser has been updated
         if (currentUserId != null) {
             viewModel.loadFriends(currentUserId).observe(viewLifecycleOwner) { friends ->
                 Log.d("FriendsFragment", "Friends loaded: ${friends.size} friends found")
@@ -85,22 +86,26 @@ class FriendsFragment : Fragment() {
         val dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_add_friend, null)
         val emailET = dialogView.findViewById<EditText>(R.id.etAddFriendEmail)
 
+        //Create the AlertDialog to show dialog window
         val dialog = AlertDialog.Builder(requireContext())
             .setTitle("Add Friend")
-            .setView(dialogView)
+            .setView(dialogView) //Set the layout for the dialog
+            //Add 2 buttons for Add and Exit
             .setPositiveButton("Add") { dialogInterface, _ ->
                 val email = emailET.text.toString()
+                //If edittext is not empty get current users ID
                 if (email.isNotEmpty()) {
                     val currentUserId = FirebaseAuth.getInstance().currentUser?.uid
 
+                    //If user is logged in and ID is found call the function in the viewmodel
                     if (currentUserId != null) {
                         viewModel.addFriend(currentUserId, email)
                     }
                 }
-                dialogInterface.dismiss()
+                dialogInterface.dismiss() //close dialog
             }
             .setNegativeButton("Exit") { dialogInterface, _ ->
-                dialogInterface.dismiss()
+                dialogInterface.dismiss() //close dialog
             }
             .create()
 
