@@ -7,6 +7,7 @@
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="welcome_back">Welcome\n back!</string>
+    <string name="welcome_back_land">Welcome back!</string>
     <string name="create_account">Create account</string>
     <string name="please_enter_your_name">Please enter your name</string>
     <string name="create_an_account">Create an account</string>
