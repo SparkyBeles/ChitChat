@@ -101,16 +101,18 @@ fun showProfileFragment() {
     val profileFragment = ProfileFragment()
     val transaction = supportFragmentManager.beginTransaction()
     transaction.replace(R.id.friendsOrChat, profileFragment, "Profile")
+    transaction.addToBackStack(null)
     transaction.commit()
 }
     fun showFriendsListFragment() {
         val existingFragment = supportFragmentManager.findFragmentByTag("Friends")
-        if (existingFragment == null) {
+       // if (existingFragment == null) {
             val friendsListFragment = FriendsFragment()
             supportFragmentManager.beginTransaction()
                 .replace(R.id.friendsOrChat, friendsListFragment, "Friends")
+                .addToBackStack(null)
                 .commit()
-        }
+      //  }
     }
 
     fun showChatFragment() {
@@ -118,6 +120,7 @@ fun showProfileFragment() {
         val bundle = Bundle()
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.friendsOrChat, chatFragment, "Chat")
+        transaction.addToBackStack(null)
         transaction.commit()
     }
 

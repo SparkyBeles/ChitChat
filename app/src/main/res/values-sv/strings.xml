@@ -17,6 +17,9 @@
     <string name="message">Meddelande</string>
     <string name="send">Skicka</string>
     <string name="recentchat">Historik</string>
+    <string name="name">Namn</string>
+    <string name="save_changes">Spara ändringar</string>
+    <string name="button">Radera</string>
 
 
 </resources>
