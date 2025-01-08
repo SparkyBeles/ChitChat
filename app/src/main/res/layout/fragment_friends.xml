@@ -6,14 +6,12 @@
     android:background="@drawable/friends_background"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".View.FriendsFragment">
-
-
+    
     <TextView
         android:id="@+id/tv_test"
         android:layout_width="wrap_content"
         android:layout_height="70dp"
         android:layout_marginTop="30dp"
-        android:text="Friends"
         android:textColor="#232A2E"
         android:text="@string/my_friends"
         android:layout_gravity="top|center_horizontal"/>

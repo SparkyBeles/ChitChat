@@ -7,7 +7,8 @@
     <string name="sign_in">Logga in</string>
     <string name="email">Epost</string>
     <string name="password">Lösenord</string>
-    <string name="welcome_back">Välkommen tillbaka!</string>
+    <string name="welcome_back">Välkommen/n tillbaka!</string>
+    <string name="welcome_back_land">Välkommen tillbaka!</string>
     <string name="create_account">Skapa konto</string>
     <string name="please_enter_your_name">Skriv ditt namn</string>
     <string name="create_an_account">Skapa konto</string>
