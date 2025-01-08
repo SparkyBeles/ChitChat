@@ -7,8 +7,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".View.FriendsFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-
 
     <TextView
         android:id="@+id/tv_test"
@@ -17,7 +15,7 @@
         android:layout_marginTop="30dp"
         android:text="Friends"
         android:textColor="#232A2E"
-        android:textSize="50sp"
+        android:text="@string/my_friends"
         android:layout_gravity="top|center_horizontal"/>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -33,7 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:backgroundTint="#232A2E"
-        android:text="Add friend"
+        android:text="@string/add_friend"
         android:textColor="@color/white"
         android:layout_margin="16dp"/>
 </FrameLayout>

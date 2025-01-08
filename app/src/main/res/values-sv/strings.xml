@@ -20,6 +20,9 @@
     <string name="name">Namn</string>
     <string name="save_changes">Spara ändringar</string>
     <string name="button">Radera</string>
+    <string name="username">Användarnamn</string>
+    <string name="my_friends">Vänner</string>
+    <string name="add_friend">Lägg till vän</string>
 
 
 </resources>

@@ -108,7 +108,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/custom_input"
                 android:gravity="center"
-                android:hint="Username"
+                android:hint="@string/username"
                 android:textColor="@color/white" />
         </com.google.android.material.textfield.TextInputLayout>
 

@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:text="@string/welcome_back"
             android:textColor="@color/white"
-            android:textSize="60sp"
+            android:textSize="40sp"
             app:layout_constraintBottom_toTopOf="@+id/textInputLayout6"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.496"
