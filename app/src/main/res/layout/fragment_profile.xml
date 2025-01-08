@@ -29,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="#00000000"
-            android:text="Save Changes"
+            android:text="@string/save_changes"
             android:textColor="#634F9E"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -43,10 +43,8 @@
             android:layout_marginTop="36dp"
             android:ems="10"
             android:inputType="text"
-            android:text="Name"
-
+            android:text="@string/name"
             app:layout_constraintEnd_toEndOf="parent"
-
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/tvName"
             app:layout_constraintTop_toBottomOf="@+id/tvUserName" />
@@ -78,7 +76,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="52dp"
-            android:text="Name"
+            android:text="@string/name"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvUserName" />
 
@@ -86,7 +84,7 @@
             android:id="@+id/deleteButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Button"
+            android:text="@string/button"
             app:layout_constraintBottom_toTopOf="@+id/signOut"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

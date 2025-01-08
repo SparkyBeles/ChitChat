@@ -17,7 +17,9 @@
     <string name="send">Send</string>
     <string name="recentchat">Recent chat</string>
     <string name="userEmail" translatable="false">Your email</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="name">Name</string>
+    <string name="save_changes">Save Changes</string>
+    <string name="button">Delete</string>
+
 
 </resources>

@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModelProvider
 import com.example.chitchat.Model.FirebaseManager
 import com.example.chitchat.Model.User
 import com.example.chitchat.R
@@ -24,9 +25,11 @@ class ProfileFragment : Fragment() {
 
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
-    val vm = ChatViewModel()
+    var vm = ChatViewModel()
     lateinit var userId: String
     var firebaseManager = FirebaseManager()
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,9 +42,10 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
         userId = auth.currentUser?.uid ?: return
 
-        loadUser()
+        loadUser(userId)
 
 
         binding.signOut.setOnClickListener {
@@ -63,14 +67,15 @@ class ProfileFragment : Fragment() {
     }
 
 
-    private fun loadUser(){
-        firebaseManager.getCurrentUser(userId) { user ->
-            user?.let {
-                binding.etName?.setText(it.name)
-            } ?: run {
-                Toast.makeText(requireContext(), "Failed to find user", Toast.LENGTH_SHORT).show()
+    private fun loadUser(userId: String){
+
+            firebaseManager.getCurrentUser(userId) { user ->
+                user?.let {
+                    binding.etName?.setText(it.name)
+                } ?: run {
+                    Toast.makeText(requireContext(), "Failed to find user", Toast.LENGTH_SHORT).show()
+                }
             }
-        }
     }
 
     private fun saveUser(){
@@ -80,14 +85,15 @@ class ProfileFragment : Fragment() {
             Toast.makeText(requireContext(), "Name can't be empty", Toast.LENGTH_SHORT).show()
             return
         }
-
-        firebaseManager.updateUser(userId, newName) { success ->
+            firebaseManager.updateUser(userId, newName) { success ->
             if (success){
                 Toast.makeText(requireContext(), "Update successfull!", Toast.LENGTH_SHORT).show()
             } else{
                 Toast.makeText(requireContext(), "Update failed!", Toast.LENGTH_SHORT).show()
             }
-        }
+
+    }
+
     }
 
 
