@@ -20,6 +20,9 @@
     <string name="name">Name</string>
     <string name="save_changes">Save Changes</string>
     <string name="button">Delete</string>
+    <string name="username">Username</string>
+    <string name="my_friends">My Friends</string>
+    <string name="add_friend">Add friend</string>
 
 
 </resources>
