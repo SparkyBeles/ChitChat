@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:background="#00000000"
             android:text="@string/save_changes"
-            android:textColor="#634F9E"
+            android:textColor="#232A2E"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/etName" />
@@ -89,7 +89,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btnSaveChanges"
-            app:layout_constraintVertical_bias="0.386" />
+            app:layout_constraintVertical_bias="0.386"
+            android:backgroundTint="#232A2E"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

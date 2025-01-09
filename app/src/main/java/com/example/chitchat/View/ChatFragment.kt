@@ -1,5 +1,6 @@
 package com.example.chitchat.View
 
+import android.app.Activity
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -7,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.activity.OnBackPressedCallback
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -108,7 +110,11 @@ class ChatFragment : Fragment() {
                 }
             }
         }
-
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                (activity as? ChatActivity)?.showFriendsListFragment()
+            }
+        })
         binding.bSend.setOnClickListener {
             val messageText = binding.etMessage.text.toString()
 //            val receiverId = arguments?.getString("receiverId") // Get receiverId from arguments
