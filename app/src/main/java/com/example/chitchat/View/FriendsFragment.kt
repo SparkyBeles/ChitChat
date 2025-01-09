@@ -28,7 +28,7 @@ class FriendsFragment : Fragment() {
     private var receiverId : String? = null // Receiver's ID when a friend is clicked.
     private var receiverName : String? = null // Receiver's name when a friend is clicked.
     val currentUserId = FirebaseAuth.getInstance().currentUser?.uid
-
+var chatIsOpened : Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -120,6 +120,7 @@ class FriendsFragment : Fragment() {
             replace(R.id.friendsOrChat, chatFragment)
             addToBackStack(null)
             commit()
+            chatIsOpened = true
         }
     }
 

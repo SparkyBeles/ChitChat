@@ -11,14 +11,12 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import com.example.chitchat.Model.FirebaseManager
 import com.example.chitchat.Model.User
 import com.example.chitchat.R
 import com.example.chitchat.ViewModel.ChatViewModel
 import com.example.chitchat.databinding.ActivityMainBinding
-import com.google.android.gms.auth.api.identity.BeginSignInRequest
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -86,10 +84,10 @@ class MainActivity : AppCompatActivity() {
 
         showSignInFragment()
 
-        binding.GoogleBtn?.setOnClickListener() {
+        binding.btnGoogle?.setOnClickListener() {
         signInWithGoogle()
         }
-        binding.signUpBtn?.setOnClickListener()
+        binding.btnSignUp?.setOnClickListener()
         {
             vm.activeFragment.value =
                 "SignUpFragment" // vm help remeber fragment in land or standing mode
@@ -99,7 +97,7 @@ class MainActivity : AppCompatActivity() {
 
 
 
-        binding.signInBtn.setOnClickListener()
+        binding.btnSignIn.setOnClickListener()
         {
             vm.activeFragment.value =
                 "SignInFragment" // vm help remeber fragment in land or standing mode
@@ -152,12 +150,12 @@ switchToSignUpButton()
 
     }
     fun switchToSignUpButton() {
-        binding.signInBtn.visibility = View.GONE
-        binding.signUpBtn?.visibility = View.VISIBLE
+        binding.btnSignIn.visibility = View.GONE
+        binding.btnSignUp?.visibility = View.VISIBLE
     }
     fun switchToSignInButton() {
-        binding.signInBtn.visibility = View.VISIBLE
-        binding.signUpBtn?.visibility = View.GONE
+        binding.btnSignIn.visibility = View.VISIBLE
+        binding.btnSignUp?.visibility = View.GONE
     }
 
     fun getClient(): GoogleSignInClient {
@@ -186,9 +184,7 @@ switchToSignUpButton()
                 usersRef.document(currentUser!!.uid).get()
                     .addOnSuccessListener { document ->
                         if (document.exists()) {
-                            Log.d("!!!","Dokumentet finns! 🎉")
                         } else {
-                            Log.d("!!!","Dokumentet finns inte. 😢")
                             val user = User(
                                 id = currentUser?.uid ?: "",
                                 name = currentUser?.displayName ?: "",
@@ -198,7 +194,7 @@ switchToSignUpButton()
                         }
                     }
                     .addOnFailureListener { exception ->
-                        println("Något gick fel: $exception")
+                        Log.d("!!!","Problem: $exception")
                     }
                 Log.d("!!!", "Google auth success")
 
