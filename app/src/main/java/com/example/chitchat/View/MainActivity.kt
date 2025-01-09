@@ -186,9 +186,7 @@ switchToSignUpButton()
                 usersRef.document(currentUser!!.uid).get()
                     .addOnSuccessListener { document ->
                         if (document.exists()) {
-                            Log.d("!!!","Dokumentet finns! 🎉")
                         } else {
-                            Log.d("!!!","Dokumentet finns inte. 😢")
                             val user = User(
                                 id = currentUser?.uid ?: "",
                                 name = currentUser?.displayName ?: "",
@@ -198,7 +196,7 @@ switchToSignUpButton()
                         }
                     }
                     .addOnFailureListener { exception ->
-                        println("Något gick fel: $exception")
+                        Log.d("!!!","Problem: $exception")
                     }
                 Log.d("!!!", "Google auth success")
 
