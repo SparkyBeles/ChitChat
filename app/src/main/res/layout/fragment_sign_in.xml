@@ -66,6 +66,7 @@
                 android:background="@drawable/custom_email_input"
                 android:gravity="center"
                 android:hint="@string/email"
+                android:inputType="textEmailAddress"
                 android:textColor="@color/white" />
 
         </com.google.android.material.textfield.TextInputLayout>
