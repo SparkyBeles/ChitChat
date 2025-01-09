@@ -74,7 +74,7 @@ class ChatFragment : Fragment() {
 
         binding.tvChatBetweenWho?.text = "Chat between you and $receiverName"
 
-        val chatRecycler = binding.chatRecycler
+        val chatRecycler = binding.rvChat
         val layoutManager = LinearLayoutManager(requireContext())
         chatRecycler.layoutManager = layoutManager
         adapter = ChatAdapter(requireContext(), messages, currentUserId)
@@ -82,6 +82,7 @@ class ChatFragment : Fragment() {
 
         // Get chat collection ID from arguments, sent from FriendsFragment.
         val chatCollectionId = arguments?.getString(ARG_CHAT_COLLECTION_ID)
+
 
         if (chatCollectionId != null) {
             vm.getAllMessages(chatCollectionId)
@@ -109,7 +110,7 @@ class ChatFragment : Fragment() {
             }
         }
 
-        binding.bSend.setOnClickListener {
+        binding.btnSend.setOnClickListener {
             val messageText = binding.etMessage.text.toString()
 //            val receiverId = arguments?.getString("receiverId") // Get receiverId from arguments
 //            val receiverName = arguments?.getString("receiverName") // Get receiverName from arguments
