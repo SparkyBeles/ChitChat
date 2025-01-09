@@ -25,10 +25,10 @@ class FriendsFragment : Fragment() {
     private lateinit var viewModel: ChatViewModel
     private lateinit var friendList: MutableList<User>
     private lateinit var adapter: FriendsAdapter
-    private var receiverId : String? = null // Receiver's ID when a friend is clicked.
-    private var receiverName : String? = null // Receiver's name when a friend is clicked.
+    private var receiverId: String? = null // Receiver's ID when a friend is clicked.
+    private var receiverName: String? = null // Receiver's name when a friend is clicked.
     val currentUserId = FirebaseAuth.getInstance().currentUser?.uid
-var chatIsOpened : Boolean = false
+    var chatIsOpened: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -108,15 +108,14 @@ var chatIsOpened : Boolean = false
                 dialogInterface.dismiss() //close dialog
             }
             .create()
-
         dialog.show()
     }
 
 
     // Creates a ChatFragment that takes in two arguments.
-    private fun openChatFragment(chatCollectionId:String, receiverId:String) {
+    private fun openChatFragment(chatCollectionId: String, receiverId: String) {
         val chatFragment = ChatFragment.newInstance(chatCollectionId, receiverId, receiverName!!)
-        parentFragmentManager.beginTransaction().apply{
+        parentFragmentManager.beginTransaction().apply {
             replace(R.id.friendsOrChat, chatFragment)
             addToBackStack(null)
             commit()

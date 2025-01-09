@@ -22,9 +22,6 @@ import com.google.firebase.auth.auth
 class ChatActivity : AppCompatActivity() {
     lateinit var binding: ActivityChatBinding
     lateinit var vm: ChatViewModel
-    lateinit var chatButton: Button
-    lateinit var friendsButton: Button
-    lateinit var signOutButton: Button
     var auth: FirebaseAuth = Firebase.auth
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityChatBinding.inflate(layoutInflater)
@@ -48,21 +45,24 @@ class ChatActivity : AppCompatActivity() {
         }
         showFriendsListFragment()
 
-        val bottomnav = findViewById<BottomNavigationView>(R.id.bottomNavigationView) //binding doesn't work
+        val bottomnav =
+            findViewById<BottomNavigationView>(R.id.bottomNavigationView) //binding doesn't work
         bottomnav.setOnItemSelectedListener { item ->
-            when(item.itemId) {
+            when (item.itemId) {
 
                 R.id.person -> {
                     showFriendsListFragment()
                     vm.activeFragment2.value = "Friends" // added for rotation reminding
                     true
                 }
+
                 R.id.profile -> {
                     vm.activeFragment2.value = "Profile" // added for rotation reminding
                     showProfileFragment()
 
                     true
                 }
+
                 else -> false
             }
         }
@@ -78,58 +78,22 @@ class ChatActivity : AppCompatActivity() {
         if (savedInstanceState == null) {
             vm.activeFragment2.value = "Friends" // default fragment
         }
-//        chatButton = findViewById(R.id.chatButton)
-//
-//        friendsButton = findViewById(R.id.friendsButton)
-//        signOutButton = findViewById(R.id.signOutButton)
-//        friendsButton.setOnClickListener {
-//            showFriendsListFragment()
-//        }
-//
-//        chatButton.setOnClickListener {
-//            showChatFragment()
-//        }
-//        signOutButton.setOnClickListener {
-//            signOut()
-//        }
-
-
     }
 
 
-fun showProfileFragment() {
-    val profileFragment = ProfileFragment()
-    val transaction = supportFragmentManager.beginTransaction()
-    transaction.replace(R.id.friendsOrChat, profileFragment, "Profile")
-    transaction.addToBackStack(null)
-    transaction.commit()
-}
-    fun showFriendsListFragment() {
-        val existingFragment = supportFragmentManager.findFragmentByTag("Friends")
-       // if (existingFragment == null) {
-            val friendsListFragment = FriendsFragment()
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.friendsOrChat, friendsListFragment, "Friends")
-                .addToBackStack(null)
-                .commit()
-      //  }
-    }
-
-    fun showChatFragment() {
-        val chatFragment = ChatFragment()
-        val bundle = Bundle()
+    fun showProfileFragment() {
+        val profileFragment = ProfileFragment()
         val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.friendsOrChat, chatFragment, "Chat")
+        transaction.replace(R.id.friendsOrChat, profileFragment, "Profile")
         transaction.addToBackStack(null)
         transaction.commit()
     }
 
-    fun signOut() {
-        val auth = FirebaseAuth.getInstance()
-        auth.signOut()
-        if (auth.currentUser == null) {
-            Toast.makeText(this, "You're signed out", Toast.LENGTH_SHORT).show()
-        }
-        finish()
+    fun showFriendsListFragment() {
+        val friendsListFragment = FriendsFragment()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.friendsOrChat, friendsListFragment, "Friends")
+            .addToBackStack(null)
+            .commit()
     }
 }

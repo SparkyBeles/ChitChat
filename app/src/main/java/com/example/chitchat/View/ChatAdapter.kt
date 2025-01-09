@@ -51,7 +51,6 @@ class ChatAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val message = messages[position]
-//        holder.message.text = message.message
 
         // Determines which list item to bind based on the viewType set in getItemViewType.
         if(holder is ViewHolderCurrentUser) {

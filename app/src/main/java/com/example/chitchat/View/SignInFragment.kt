@@ -16,7 +16,7 @@ import com.google.firebase.auth.auth
 
 class SignInFragment : Fragment() {
     var auth: FirebaseAuth = Firebase.auth
-    lateinit var vm : ChatViewModel
+    lateinit var vm: ChatViewModel
 
     private var _binding: FragmentSignInBinding? =
         null
@@ -36,7 +36,7 @@ class SignInFragment : Fragment() {
         vm = ViewModelProvider(requireActivity()).get(ChatViewModel::class.java)
 
         vm.startChat.observe(viewLifecycleOwner) { startChat ->
-            if(startChat) {
+            if (startChat) {
                 vm.startChat.value = false
             }
         }
@@ -48,7 +48,7 @@ class SignInFragment : Fragment() {
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) { // shall we remove this one too?
         super.onViewCreated(view, savedInstanceState)
 
     }
@@ -64,17 +64,25 @@ class SignInFragment : Fragment() {
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     vm.startChat.value = true
-//                    Toast.makeText(context, "Welcome back!", Toast.LENGTH_SHORT).show()
-                    val user = auth.currentUser
+
                 } else {
                     val exception = task.exception
 
                     when (exception) {
                         is FirebaseAuthInvalidCredentialsException -> {
-                            Toast.makeText(context, "Incorrect E-Mail or Password", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(
+                                context,
+                                "Incorrect E-Mail or Password",
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
+
                         else -> {
-                            Toast.makeText(context, "Login failed: ${exception?.message}", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(
+                                context,
+                                "Login failed: ${exception?.message}",
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
                     }
                 }

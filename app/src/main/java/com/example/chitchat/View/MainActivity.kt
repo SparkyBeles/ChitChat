@@ -48,7 +48,6 @@ class MainActivity : AppCompatActivity() {
 
 
         auth = Firebase.auth
-        //val db = Firebase.firestore // flyttad till firebasemanager
 
         vm = ViewModelProvider(this).get(
             ChatViewModel::
@@ -85,7 +84,7 @@ class MainActivity : AppCompatActivity() {
         showSignInFragment()
 
         binding.btnGoogle?.setOnClickListener() {
-        signInWithGoogle()
+            signInWithGoogle()
         }
         binding.btnSignUp?.setOnClickListener()
         {
@@ -123,36 +122,28 @@ class MainActivity : AppCompatActivity() {
 
     fun showSignInFragment() {
 
-
-        val existingFragment = supportFragmentManager.findFragmentByTag("SignInFragment")
-      //  if (existingFragment == null) {
-            val signInFragment = SignInFragment()
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.authFrame, signInFragment, "SignInFragment")
-                .addToBackStack(null)
-                .commit()
-switchToSignUpButton()
-    //   }
-
+        val signInFragment = SignInFragment()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.authFrame, signInFragment, "SignInFragment")
+            .addToBackStack(null)
+            .commit()
+        switchToSignUpButton()
     }
 
     fun showSignUpFragment() {
-        val existingFragment = supportFragmentManager.findFragmentByTag("SignUpFragment")
-     //  if (existingFragment == null) {
-            val signUpFragment = SignUpFragment()
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.authFrame, signUpFragment, "SignUpFragment")
-                .addToBackStack(null)
-                .commit()
+        val signUpFragment = SignUpFragment()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.authFrame, signUpFragment, "SignUpFragment")
+            .addToBackStack(null)
+            .commit()
         switchToSignInButton()
-      //  }
-
-
     }
+
     fun switchToSignUpButton() {
         binding.btnSignIn.visibility = View.GONE
         binding.btnSignUp?.visibility = View.VISIBLE
     }
+
     fun switchToSignInButton() {
         binding.btnSignIn.visibility = View.VISIBLE
         binding.btnSignUp?.visibility = View.GONE
@@ -194,7 +185,7 @@ switchToSignUpButton()
                         }
                     }
                     .addOnFailureListener { exception ->
-                        Log.d("!!!","Problem: $exception")
+                        Log.d("!!!", "Problem: $exception")
                     }
                 Log.d("!!!", "Google auth success")
 

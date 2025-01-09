@@ -43,19 +43,13 @@ class SignUpFragment : Fragment() {
         var signUpBtn = binding.signUpFragmentBtn
         signUpBtn.setOnClickListener {
             signUp()
-
-
         }
 
         return binding.root
-
-
     }
 
 
-
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) { // shall we remove it?
         super.onViewCreated(view, savedInstanceState)
     }
 
@@ -103,7 +97,7 @@ class SignUpFragment : Fragment() {
 
                     binding.confetti?.start(parade())
 
-                    Toast.makeText(context,"User is created!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "User is created!", Toast.LENGTH_SHORT).show()
 
 
 
@@ -114,9 +108,8 @@ class SignUpFragment : Fragment() {
                     }, 3000)
 
 
-
                 } else {
-                    Toast.makeText(context,"User not created", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "User not created", Toast.LENGTH_SHORT).show()
                     Log.d("!!!", "user not created ${task.exception}")
                 }
             }

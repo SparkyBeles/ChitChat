@@ -25,10 +25,8 @@ class ProfileFragment : Fragment() {
 
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
-    var vm = ChatViewModel()
     lateinit var userId: String
     var firebaseManager = FirebaseManager()
-
 
 
     override fun onCreateView(
@@ -67,7 +65,7 @@ class ProfileFragment : Fragment() {
     }
 
 
-    private fun loadUser(userId: String){
+    private fun loadUser(userId: String) {
         //Call the function from firebasemanager to get the user data
         firebaseManager.getCurrentUser(userId) { user ->
             //if user object is not null, update the username in the EditText
@@ -80,27 +78,25 @@ class ProfileFragment : Fragment() {
         }
     }
 
-    private fun saveUser(){
+    private fun saveUser() {
         //Save the name from the edittext to a newName variable
         //Trim the whitespaces in the beginning and end
         val newName = binding.etName?.text.toString().trim()
 
         //check if the Edittext is empty and if it is show toast and return out of the function
-        if (newName.isEmpty()){
+        if (newName.isEmpty()) {
             Toast.makeText(requireContext(), "Name can't be empty", Toast.LENGTH_SHORT).show()
             return
         }
         //call for function in firebasemanager to update name of the user
         firebaseManager.updateUser(userId, newName) { success ->
             //Show toasts if successfull or failed
-            if (success){
+            if (success) {
                 Toast.makeText(requireContext(), "Update successfull!", Toast.LENGTH_SHORT).show()
-            } else{
+            } else {
                 Toast.makeText(requireContext(), "Update failed!", Toast.LENGTH_SHORT).show()
             }
-
         }
-
     }
 
 
@@ -114,21 +110,16 @@ class ProfileFragment : Fragment() {
         }
     }
 
-
-    fun deleteAccount(){
+    fun deleteAccount() {
         val user = FirebaseAuth.getInstance().currentUser
 
         user?.delete()?.addOnCompleteListener { task ->
-            if (task.isSuccessful){
-                Toast.makeText(context,"Account Deleted!",Toast.LENGTH_SHORT).show()
+            if (task.isSuccessful) {
+                Toast.makeText(context, "Account Deleted!", Toast.LENGTH_SHORT).show()
                 signOut()
 
             }
 
         }
-
-
     }
-
-
 }

@@ -28,15 +28,12 @@ private const val ARG_RECEIVER_NAME = "receiverName"
 
 
 class ChatFragment : Fragment() {
-//    private var _binding: FragmentChatBinding? =
-//        null
-//    private val binding get() = _binding!!
-    lateinit var binding : FragmentChatBinding
-    lateinit var db : FirebaseFirestore
-    lateinit var adapter : ChatAdapter
+    lateinit var binding: FragmentChatBinding
+    lateinit var db: FirebaseFirestore
+    lateinit var adapter: ChatAdapter
     val currentUserId = FirebaseAuth.getInstance().currentUser?.uid
-    var currentUserName : String? = null
-    lateinit var vm : ChatViewModel
+    var currentUserName: String? = null
+    lateinit var vm: ChatViewModel
     private var param1: String? = null
     private var param2: String? = null
     private var param3: String? = null
@@ -112,15 +109,15 @@ class ChatFragment : Fragment() {
             }
         }
 
-        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                (activity as? ChatActivity)?.showFriendsListFragment()
-            }
-        })
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    (activity as? ChatActivity)?.showFriendsListFragment()
+                }
+            })
         binding.btnSend.setOnClickListener {
             val messageText = binding.etMessage.text.toString()
-//            val receiverId = arguments?.getString("receiverId") // Get receiverId from arguments
-//            val receiverName = arguments?.getString("receiverName") // Get receiverName from arguments
 
             if (messageText.isNotEmpty() && chatCollectionId != null && currentUserId != null && receiverId != null) {
                 val message = Message(
@@ -150,11 +147,12 @@ class ChatFragment : Fragment() {
     private fun scrollToBottom(layoutManager: LinearLayoutManager, recyclerView: RecyclerView) {
         val lastPosition = adapter.itemCount - 1
         if (lastPosition >= 0) {
-            layoutManager.smoothScrollToPosition(recyclerView,
-                RecyclerView.State(), lastPosition)
+            layoutManager.smoothScrollToPosition(
+                recyclerView,
+                RecyclerView.State(), lastPosition
+            )
         }
     }
-
 
 
     companion object {

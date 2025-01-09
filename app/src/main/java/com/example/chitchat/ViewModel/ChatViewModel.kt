@@ -11,7 +11,6 @@ class ChatViewModel : ViewModel() {
 
     val startChat = MutableLiveData<Boolean>()
     private val firebaseManager = FirebaseManager()
-    val friends : LiveData<List<User>> = MutableLiveData()
     val addFriendStatus = MutableLiveData<Boolean>()
     val activeFragment = MutableLiveData<String>("SignInFragment")
     val activeFragment2= MutableLiveData<String>("Friends") // Default fragment
