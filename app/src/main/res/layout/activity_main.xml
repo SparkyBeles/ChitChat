@@ -14,14 +14,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/signInBtn"
+        app:layout_constraintBottom_toTopOf="@+id/btn_sign_in"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 
     <Button
-        android:id="@+id/signUpBtn"
+        android:id="@+id/btn_sign_up"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -29,13 +29,13 @@
         android:background="#00000000"
         android:text="@string/sign_up"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/GoogleBtn"
+        app:layout_constraintBottom_toTopOf="@+id/btn_google"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.507"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/signInBtn"
+        android:id="@+id/btn_sign_in"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -43,20 +43,18 @@
         android:background="#00000000"
         android:text="@string/sign_in"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/GoogleBtn"
+        app:layout_constraintBottom_toTopOf="@+id/btn_google"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
-        android:id="@+id/GoogleBtn"
+    <ImageButton
+        android:id="@+id/btn_google"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginBottom="10dp"
         android:background="@drawable/google"
-        android:foreground="@drawable/google"
         android:text="Button"
-        android:backgroundTint="#232A2E"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
