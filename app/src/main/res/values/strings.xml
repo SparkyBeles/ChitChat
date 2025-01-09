@@ -24,6 +24,8 @@
     <string name="username">Username</string>
     <string name="my_friends">My Friends</string>
     <string name="add_friend">Add friend</string>
+    <string name="chat_between_you_and_your_friend">Chat between you and your friend</string>
+    <string name="sendername">SenderName</string>
 
 
 </resources>

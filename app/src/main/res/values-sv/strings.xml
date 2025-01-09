@@ -24,6 +24,8 @@
     <string name="username">Användarnamn</string>
     <string name="my_friends">Vänner</string>
     <string name="add_friend">Lägg till vän</string>
+    <string name="chat_between_you_and_your_friend">Chat mellan dig och din vän</string>
+    <string name="sendername">Avsändare</string>
 
 
 </resources>
