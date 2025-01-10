@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
@@ -57,11 +58,12 @@ class ProfileFragment : Fragment() {
 
 
         binding.deleteButton?.setOnClickListener {
-            deleteAccount()
+            showPopup()
+
         }
 
         binding.deleteButton2?.setOnClickListener {
-            deleteAccount()
+            showPopup()
         }
 
     }
@@ -122,13 +124,25 @@ class ProfileFragment : Fragment() {
             if (task.isSuccessful){
                 Toast.makeText(context,"Account Deleted!",Toast.LENGTH_SHORT).show()
                 signOut()
-
             }
-
         }
-
-
     }
+
+
+    //  Popup before deleting an account.
+    private fun showPopup(){
+        val builder = context?.let { AlertDialog.Builder(it) }
+        builder!!.setTitle("ChitChat")
+            .setMessage("Do you want to delete account?")
+            .setPositiveButton("Yes"){dialog,which ->
+                deleteAccount()
+            }
+            .setNegativeButton("No") {dialog, which -> dialog.dismiss()
+            }
+        val alertDialog: AlertDialog = builder.create()
+        alertDialog.show()
+    }
+
 
 
 }
