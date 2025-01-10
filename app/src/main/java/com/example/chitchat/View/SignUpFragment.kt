@@ -1,5 +1,4 @@
 package com.example.chitchat.View
-
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -24,7 +23,11 @@ import nl.dionsegijn.konfetti.core.emitter.Emitter
 import java.util.concurrent.TimeUnit
 
 class SignUpFragment : Fragment() {
-    var auth: FirebaseAuth = Firebase.auth
+
+    //  Firebase Authentication instance to handle user authentication processes.
+    private var auth: FirebaseAuth = Firebase.auth
+
+   //  Instance of FirebaseManager.
     private val firebaseManager = FirebaseManager()
 
     private var _binding: FragmentSignUpBinding? = null
@@ -34,22 +37,19 @@ class SignUpFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentSignUpBinding.inflate(
             inflater,
             container,
             false
         )
-        var signUpBtn = binding.btnSignup
+        val signUpBtn = binding.btnSignup
         signUpBtn.setOnClickListener {
             signUp()
 
 
         }
-
         return binding.root
-
-
     }
 
 
@@ -59,7 +59,8 @@ class SignUpFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
     }
 
-    fun parade(): List<Party> {
+    //  Confetti preset.
+    private fun parade(): List<Party> {
         val party = Party(
             speed = 10f,
             maxSpeed = 30f,
@@ -68,20 +69,20 @@ class SignUpFragment : Fragment() {
             spread = Spread.SMALL,
             colors = listOf(0xfce18a, 0xff726d, 0xf4306d, 0xb48def),
             emitter = Emitter(duration = 5, TimeUnit.SECONDS).perSecond(30),
-            position = Position.Relative(0.0, 0.5)
-        )
+            position = Position.Relative(0.0, 0.5))
 
         return listOf(
             party,
             party.copy(
                 angle = party.angle - 90, // flip angle from right to left
-                position = Position.Relative(1.0, 0.5)
-            ),
-        )
+                position = Position.Relative(1.0, 0.5)),
+            )
     }
 
 
-    fun signUp() {
+
+    //  Sign-up function with a confetti preset triggered upon successful sign-up.
+    private fun signUp() {
         val name = binding.etUserName.text.toString()
         val email = binding.etEmail.text.toString()
         val password = binding.etPassword.text.toString()
@@ -98,22 +99,17 @@ class SignUpFragment : Fragment() {
                         name = name,
                         email = email
                     )
-
                     firebaseManager.saveNewUser(user)
 
                     binding.confetti.start(parade())
 
                     Toast.makeText(context,"User is created!", Toast.LENGTH_SHORT).show()
 
-
-
                     Handler(Looper.getMainLooper()).postDelayed({
                         parentFragmentManager.beginTransaction()
                             .replace(R.id.authFrame, SignInFragment())
                             .commit()
                     }, 3000)
-
-
 
                 } else {
                     Toast.makeText(context,"User not created", Toast.LENGTH_SHORT).show()

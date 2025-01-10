@@ -1,5 +1,4 @@
 package com.example.chitchat.View
-
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -15,11 +14,14 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.auth
 
 class SignInFragment : Fragment() {
-    var auth: FirebaseAuth = Firebase.auth
-    lateinit var vm : ChatViewModel
+    //  Firebase Authentication instance to handle user authentication processes.
+    private var auth: FirebaseAuth = Firebase.auth
 
-    private var _binding: FragmentSignInBinding? =
-        null
+    //  ViewModel instance to manage chat related logic.
+    private lateinit var vm : ChatViewModel
+
+
+    private var _binding: FragmentSignInBinding? = null
     private val binding get() = _binding!!
 
 
@@ -33,27 +35,25 @@ class SignInFragment : Fragment() {
             false
         )
 
-        vm = ViewModelProvider(requireActivity()).get(ChatViewModel::class.java)
-
+        //  Initialize the ViewModel to manage logic & logic before the view is created.
+        vm = ViewModelProvider(requireActivity())[ChatViewModel::class.java]
         vm.startChat.observe(viewLifecycleOwner) { startChat ->
             if(startChat) {
                 vm.startChat.value = false
             }
         }
 
-        var signInBtn = binding.btnSigninFrag
+
+        val signInBtn = binding.btnSigninFrag
+
         signInBtn.setOnClickListener {
             signIn()
         }
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-    }
-
-    fun signIn() {
+    //  Function for signing in with email & password.
+    private fun signIn() {
         val email = binding.etEmailSignin.text.toString()
         val password = binding.etPasswordSignin.text.toString()
 
@@ -64,8 +64,8 @@ class SignInFragment : Fragment() {
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     vm.startChat.value = true
-//                    Toast.makeText(context, "Welcome back!", Toast.LENGTH_SHORT).show()
-                    val user = auth.currentUser
+                   Toast.makeText(context, "Welcome back!", Toast.LENGTH_SHORT).show()
+                    auth.currentUser
                 } else {
                     val exception = task.exception
 
@@ -80,5 +80,6 @@ class SignInFragment : Fragment() {
                 }
             }
     }
+
 
 }
