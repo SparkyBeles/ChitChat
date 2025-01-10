@@ -6,8 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/friends_background"
     tools:context=".View.ProfileFragment"
-    android:id="@+id/profile"
-    >
+    android:id="@+id/profile">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -15,7 +14,7 @@
         android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/iv_profile_picture"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
@@ -26,22 +25,22 @@
 
 
         <Button
-            android:id="@+id/btnSaveChanges"
+            android:id="@+id/btn_save_changes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="130dp"
             android:background="#00000000"
             android:text="@string/save_changes"
             android:textColor="@color/black"
-            app:layout_constraintBottom_toBottomOf="@+id/etName"
+            app:layout_constraintBottom_toBottomOf="@+id/et_name"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.491"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/deleteButton2"
+            app:layout_constraintTop_toTopOf="@+id/btn_delete2"
             app:layout_constraintVertical_bias="0.808" />
 
         <Button
-            android:id="@+id/signOut"
+            android:id="@+id/btn_sign_out"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="56dp"
@@ -49,11 +48,11 @@
             android:gravity="center_horizontal"
             android:text="@string/sign_out"
             android:textColor="#FF0000"
-            app:layout_constraintBottom_toBottomOf="@+id/deleteButton2"
-            app:layout_constraintEnd_toStartOf="@+id/deleteButton2" />
+            app:layout_constraintBottom_toBottomOf="@+id/btn_delete2"
+            app:layout_constraintEnd_toStartOf="@+id/btn_delete2" />
 
         <Button
-            android:id="@+id/deleteButton2"
+            android:id="@+id/btn_delete2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
@@ -62,10 +61,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.62"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnSaveChanges" />
+            app:layout_constraintTop_toBottomOf="@+id/btn_save_changes" />
 
         <EditText
-            android:id="@+id/etName"
+            android:id="@+id/et_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -77,14 +76,14 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tvName"
+            android:id="@+id/tv_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="200dp"
             android:layout_marginEnd="10dp"
             android:text="@string/name"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/etName"
+            app:layout_constraintEnd_toStartOf="@+id/et_name"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
