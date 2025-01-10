@@ -109,7 +109,7 @@ class ProfileFragment : Fragment() {
 
         }
     }
-
+ 
     fun deleteAccount() {
         val user = FirebaseAuth.getInstance().currentUser
 
