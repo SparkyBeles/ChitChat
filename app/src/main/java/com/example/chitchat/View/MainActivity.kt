@@ -125,27 +125,24 @@ class MainActivity : AppCompatActivity() {
 
 
         val existingFragment = supportFragmentManager.findFragmentByTag("SignInFragment")
-      //  if (existingFragment == null) {
             val signInFragment = SignInFragment()
             supportFragmentManager.beginTransaction()
                 .replace(R.id.authFrame, signInFragment, "SignInFragment")
                 .addToBackStack(null)
                 .commit()
-switchToSignUpButton()
-    //   }
+        switchToSignUpButton()
+
 
     }
 
     fun showSignUpFragment() {
         val existingFragment = supportFragmentManager.findFragmentByTag("SignUpFragment")
-     //  if (existingFragment == null) {
             val signUpFragment = SignUpFragment()
             supportFragmentManager.beginTransaction()
                 .replace(R.id.authFrame, signUpFragment, "SignUpFragment")
                 .addToBackStack(null)
                 .commit()
         switchToSignInButton()
-      //  }
 
 
     }

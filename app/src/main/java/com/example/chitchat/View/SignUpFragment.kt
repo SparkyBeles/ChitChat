@@ -40,7 +40,7 @@ class SignUpFragment : Fragment() {
             container,
             false
         )
-        var signUpBtn = binding.signUpFragmentBtn
+        var signUpBtn = binding.btnSignup
         signUpBtn.setOnClickListener {
             signUp()
 
@@ -82,9 +82,9 @@ class SignUpFragment : Fragment() {
 
 
     fun signUp() {
-        val name = binding.userNameEd1?.text.toString()
-        val email = binding.emailEt2?.text.toString()
-        val password = binding.passwordEt2?.text.toString()
+        val name = binding.etUserName.text.toString()
+        val email = binding.etEmail.text.toString()
+        val password = binding.etPassword.text.toString()
 
         if (name.isEmpty() || email.isEmpty() || password.isEmpty()) {
             return
@@ -101,7 +101,7 @@ class SignUpFragment : Fragment() {
 
                     firebaseManager.saveNewUser(user)
 
-                    binding.confetti?.start(parade())
+                    binding.confetti.start(parade())
 
                     Toast.makeText(context,"User is created!", Toast.LENGTH_SHORT).show()
 

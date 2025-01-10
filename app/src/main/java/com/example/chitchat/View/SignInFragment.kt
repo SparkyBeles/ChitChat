@@ -41,7 +41,7 @@ class SignInFragment : Fragment() {
             }
         }
 
-        var signInBtn = binding.signInFragmentBtn
+        var signInBtn = binding.btnSigninFrag
         signInBtn.setOnClickListener {
             signIn()
         }
@@ -54,8 +54,8 @@ class SignInFragment : Fragment() {
     }
 
     fun signIn() {
-        val email = binding.emailEt1?.text.toString()
-        val password = binding.passwordEt1?.text.toString()
+        val email = binding.etEmailSignin.text.toString()
+        val password = binding.etPasswordSignin.text.toString()
 
         if (email.isEmpty() || password.isEmpty()) {
             return
