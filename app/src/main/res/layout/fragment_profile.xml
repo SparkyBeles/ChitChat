@@ -14,7 +14,7 @@
         android:layout_height="match_parent">
 
         <Button
-            android:id="@+id/signOut"
+            android:id="@+id/btn_sign_out"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
@@ -26,7 +26,7 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <Button
-            android:id="@+id/btnSaveChanges"
+            android:id="@+id/btn_save_changes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="#00000000"
@@ -34,10 +34,10 @@
             android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etName" />
+            app:layout_constraintTop_toBottomOf="@+id/et_name" />
 
         <EditText
-            android:id="@+id/etName"
+            android:id="@+id/et_name"
             android:layout_width="300dp"
             android:layout_height="46dp"
             android:layout_marginStart="10dp"
@@ -47,12 +47,12 @@
             android:text="@string/name"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/tvName"
-            app:layout_constraintTop_toBottomOf="@+id/tvUserName" />
+            app:layout_constraintStart_toEndOf="@+id/tv_name"
+            app:layout_constraintTop_toBottomOf="@+id/tv_user_name" />
 
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/iv_profile_picture"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
@@ -62,35 +62,35 @@
             tools:src="@tools:sample/avatars" />
 
         <TextView
-            android:id="@+id/tvUserName"
+            android:id="@+id/tv_user_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:textSize="34sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView" />
+            app:layout_constraintTop_toBottomOf="@+id/iv_profile_picture" />
 
         <TextView
-            android:id="@+id/tvName"
+            android:id="@+id/tv_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="52dp"
             android:text="@string/name"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvUserName" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_user_name" />
 
         <Button
-            android:id="@+id/deleteButton"
+            android:id="@+id/btn_delete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/button"
             android:backgroundTint="@color/black"
-            app:layout_constraintBottom_toTopOf="@+id/signOut"
+            app:layout_constraintBottom_toTopOf="@+id/btn_sign_out"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnSaveChanges"
+            app:layout_constraintTop_toBottomOf="@+id/btn_save_changes"
             app:layout_constraintVertical_bias="0.386"
             />
 

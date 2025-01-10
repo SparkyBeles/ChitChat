@@ -5,16 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModelProvider
 import com.example.chitchat.Model.FirebaseManager
-import com.example.chitchat.Model.User
-import com.example.chitchat.R
-import com.example.chitchat.ViewModel.ChatViewModel
 import com.example.chitchat.databinding.FragmentProfileBinding
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
@@ -22,13 +15,12 @@ import com.google.firebase.auth.auth
 
 class ProfileFragment : Fragment() {
 
-    var auth: FirebaseAuth = Firebase.auth
+    private var auth: FirebaseAuth = Firebase.auth
 
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
-    var vm = ChatViewModel()
-    lateinit var userId: String
-    var firebaseManager = FirebaseManager()
+    private lateinit var userId: String
+    private var firebaseManager = FirebaseManager()
 
 
 
@@ -49,23 +41,21 @@ class ProfileFragment : Fragment() {
         loadUser(userId)
 
 
-        binding.signOut.setOnClickListener {
+        binding.btnSignOut.setOnClickListener {
             signOut()
         }
-        binding.btnSaveChanges?.setOnClickListener {
+
+        binding.btnSaveChanges.setOnClickListener {
             saveUser()
         }
 
-
-        binding.deleteButton?.setOnClickListener {
-            showPopup()
-
-        }
-
-        binding.deleteButton2?.setOnClickListener {
+        binding.btnDelete?.setOnClickListener {
             showPopup()
         }
 
+        binding.btnDelete2?.setOnClickListener {
+            showPopup()
+        }
     }
 
 
@@ -74,7 +64,7 @@ class ProfileFragment : Fragment() {
         firebaseManager.getCurrentUser(userId) { user ->
             //if user object is not null, update the username in the EditText
             user?.let {
-                binding.etName?.setText(it.name)
+                binding.etName.setText(it.name)
             } ?: run {
                 //if no user was found show a toast message
                 Toast.makeText(requireContext(), "Failed to find user", Toast.LENGTH_SHORT).show()
@@ -85,7 +75,7 @@ class ProfileFragment : Fragment() {
     private fun saveUser(){
         //Save the name from the edittext to a newName variable
         //Trim the whitespaces in the beginning and end
-        val newName = binding.etName?.text.toString().trim()
+        val newName = binding.etName.text.toString().trim()
 
         //check if the Edittext is empty and if it is show toast and return out of the function
         if (newName.isEmpty()){
@@ -106,7 +96,7 @@ class ProfileFragment : Fragment() {
     }
 
 
-    fun signOut() {
+    private fun signOut() {
         val auth = FirebaseAuth.getInstance()
         auth.signOut()
         if (auth.currentUser == null) {
@@ -117,7 +107,7 @@ class ProfileFragment : Fragment() {
     }
 
 
-    fun deleteAccount(){
+    private fun deleteAccount(){
         val user = FirebaseAuth.getInstance().currentUser
 
         user?.delete()?.addOnCompleteListener { task ->

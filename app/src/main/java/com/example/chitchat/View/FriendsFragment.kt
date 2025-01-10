@@ -27,8 +27,8 @@ class FriendsFragment : Fragment() {
     private lateinit var adapter: FriendsAdapter
     private var receiverId : String? = null // Receiver's ID when a friend is clicked.
     private var receiverName : String? = null // Receiver's name when a friend is clicked.
-    val currentUserId = FirebaseAuth.getInstance().currentUser?.uid
-var chatIsOpened : Boolean = false
+    private val currentUserId = FirebaseAuth.getInstance().currentUser?.uid
+    private var chatIsOpened : Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -53,8 +53,8 @@ var chatIsOpened : Boolean = false
             // uses id from friend and currentUser to create chat collection with unique ID.
             viewModel.openChat(friend.id, currentUserId ?: "") //
         }
-        binding.friendsRecycler.layoutManager = LinearLayoutManager(requireContext())
-        binding.friendsRecycler.adapter = adapter
+        binding.rvFriends.layoutManager = LinearLayoutManager(requireContext())
+        binding.rvFriends.adapter = adapter
 
 
         // Observe if friends for the currentUser has been updated
@@ -77,14 +77,14 @@ var chatIsOpened : Boolean = false
             }
         }
 
-        binding.fabAddFriends?.setOnClickListener {
+        binding.fabAddFriends.setOnClickListener {
             showAddFriend()
         }
     }
 
-    fun showAddFriend() {
+    private fun showAddFriend() {
         val dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_add_friend, null)
-        val emailET = dialogView.findViewById<EditText>(R.id.etAddFriendEmail)
+        val emailET = dialogView.findViewById<EditText>(R.id.et_add_friend_email)
 
         //Create the AlertDialog to show dialog window
         val dialog = AlertDialog.Builder(requireContext())
