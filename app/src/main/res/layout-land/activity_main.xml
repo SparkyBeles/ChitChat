@@ -14,13 +14,13 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/accountQuestion"
+        app:layout_constraintEnd_toStartOf="@+id/tv_accountQuestion"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 
     <TextView
-        android:id="@+id/accountQuestion"
+        android:id="@+id/tv_accountQuestion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="55dp"
@@ -39,7 +39,7 @@
         android:background="#00000000"
         android:text="@string/sign_in"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="@+id/accountQuestion"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_accountQuestion"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         />
@@ -53,10 +53,21 @@
         android:background="#00000000"
         android:text="@string/sign_up"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="@+id/accountQuestion"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_accountQuestion"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
          />
+    <ImageButton
+        android:id="@+id/btn_google"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/google"
+        android:text="Button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
