@@ -175,19 +175,22 @@ class MainActivity : AppCompatActivity() {
                 val usersRef = db.collection("users")
                 usersRef.document(currentUser!!.uid).get()
                     .addOnSuccessListener { document ->
-                        if (!document.exists()) {
+                        if (document.exists()) {
+                        } else {
                             val user = User(
-                                id = currentUser.uid ?: "",
-                                name = currentUser.displayName ?: "",
-                                email = currentUser.email ?: ""
+                                id = currentUser?.uid ?: "",
+                                name = currentUser?.displayName ?: "",
+                                email = currentUser?.email ?: ""
                             )
                             firebaseManager.saveNewUser(user)
                         }
                     }
                     .addOnFailureListener { exception ->
-                        Log.d("!!!", "Problem: $exception")
+                        Log.d("!!!","Problem: $exception")
                     }
                 Log.d("!!!", "Google auth success")
+
+
                 vm.startChat.value = true
             } else {
                 Log.d("!!!", "Google auth failed")
