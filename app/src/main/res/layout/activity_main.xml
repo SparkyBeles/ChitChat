@@ -9,7 +9,7 @@
     tools:context=".View.MainActivity">
 
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/authFrame"
+        android:id="@+id/fcv_auth"
         android:name="com.example.chitchat.View.SignUpFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

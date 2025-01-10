@@ -107,7 +107,7 @@ class SignUpFragment : Fragment() {
 
                     Handler(Looper.getMainLooper()).postDelayed({
                         parentFragmentManager.beginTransaction()
-                            .replace(R.id.authFrame, SignInFragment())
+                            .replace(R.id.fcv_auth, SignInFragment())
                             .commit()
                     }, 3000)
 

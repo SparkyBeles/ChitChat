@@ -10,7 +10,7 @@
 
 
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/authFrame"
+        android:id="@+id/fcv_auth"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
