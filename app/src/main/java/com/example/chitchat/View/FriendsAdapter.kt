@@ -32,7 +32,7 @@ class FriendsAdapter(
     override fun getItemCount(): Int = friends.size
 
     class FriendViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val friendName: TextView = itemView.findViewById(R.id.friend)
+        private val friendName: TextView = itemView.findViewById(R.id.tv_friend)
 
         fun bind(friend: User) {
             friendName.text = friend.name

@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <TextView
-        android:id="@+id/name_current_user"
+        android:id="@+id/tv_name_current_user"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/sendername"
@@ -14,7 +14,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginEnd="23dp"/>
-
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cv_message_current_user"
@@ -28,13 +27,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginBottom="5dp">
 
-
-
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent">
-
 
             <TextView
                 android:id="@+id/tv_message_current_user"

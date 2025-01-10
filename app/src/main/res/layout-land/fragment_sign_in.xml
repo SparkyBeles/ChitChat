@@ -14,7 +14,7 @@
 
 
         <TextView
-            android:id="@+id/tv_createaccount"
+            android:id="@+id/tv_create_account"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/welcome_back_land"
@@ -27,7 +27,27 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/pass_word_design"
+            android:id="@+id/email_signin_design"
+            android:layout_width="409dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="70dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_create_account">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_email_signin"
+                android:layout_width="match_parent"
+                android:layout_height="62dp"
+                android:background="@drawable/custom_email_input"
+                android:gravity="center"
+                android:hint="@string/email"
+                android:textColor="@color/white" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/password_signin_design"
             android:layout_width="409dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -44,29 +64,7 @@
                 android:gravity="center"
                 android:hint="@string/password"
                 android:inputType="textPassword"
-                android:textColor="@color/white"
-
-                />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/email_signin_design"
-            android:layout_width="409dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="70dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_createaccount">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/et_email_signin"
-                android:layout_width="match_parent"
-                android:layout_height="62dp"
-                android:background="@drawable/custom_email_input"
-                android:gravity="center"
-                android:hint="@string/email"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -83,7 +81,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pass_word_design"
+            app:layout_constraintTop_toBottomOf="@+id/password_signin_design"
             app:layout_constraintVertical_bias="1.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
