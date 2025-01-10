@@ -117,7 +117,7 @@ var chatIsOpened : Boolean = false
     private fun openChatFragment(chatCollectionId:String, receiverId:String) {
         val chatFragment = ChatFragment.newInstance(chatCollectionId, receiverId, receiverName!!)
         parentFragmentManager.beginTransaction().apply{
-            replace(R.id.friendsOrChat, chatFragment)
+            replace(R.id.fcv_friends_or_chat, chatFragment)
             addToBackStack(null)
             commit()
             chatIsOpened = true

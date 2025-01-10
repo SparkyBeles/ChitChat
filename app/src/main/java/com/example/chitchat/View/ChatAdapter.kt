@@ -8,12 +8,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.chitchat.Model.Message
 import com.example.chitchat.R
-import com.google.firebase.Firebase
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.auth
 import java.text.SimpleDateFormat
 import java.util.Calendar
-import java.util.Date
 import java.util.Locale
 
 class ChatAdapter(
@@ -32,7 +28,7 @@ class ChatAdapter(
     // ViewHolder for current user. Inherits from ViewHolder.
     inner class ViewHolderCurrentUser(itemView: View) : ChatAdapter.ViewHolder(itemView) {
         val messageCurrentUser = itemView.findViewById<TextView>(R.id.tv_message_current_user)
-        val nameCurrentUser = itemView.findViewById<TextView>(R.id.name_current_user)
+        val nameCurrentUser = itemView.findViewById<TextView>(R.id.tv_name_current_user)
         val timestampCurrentUser = itemView.findViewById<TextView>(R.id.tv_timestamp_current_user)
     }
     // ViewHolder for other user. Inherits from ViewHolder.

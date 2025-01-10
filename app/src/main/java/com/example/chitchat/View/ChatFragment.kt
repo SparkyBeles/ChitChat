@@ -1,19 +1,16 @@
 package com.example.chitchat.View
 
-import android.app.Activity
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.chitchat.Model.Message
-import com.example.chitchat.Model.User
 import com.example.chitchat.ViewModel.ChatViewModel
 import com.example.chitchat.databinding.FragmentChatBinding
 import com.google.firebase.Firebase
@@ -28,9 +25,6 @@ private const val ARG_RECEIVER_NAME = "receiverName"
 
 
 class ChatFragment : Fragment() {
-//    private var _binding: FragmentChatBinding? =
-//        null
-//    private val binding get() = _binding!!
     lateinit var binding : FragmentChatBinding
     lateinit var db : FirebaseFirestore
     lateinit var adapter : ChatAdapter
@@ -55,12 +49,7 @@ class ChatFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentChatBinding.inflate(
-            inflater,
-            container,
-            false
-        )
-
+        binding = FragmentChatBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -68,13 +57,12 @@ class ChatFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         vm = ViewModelProvider(this)[ChatViewModel::class.java]
-
         db = Firebase.firestore
-        val messages = mutableListOf<Message>()
+        val messages = mutableListOf<Message>() // Initialize empty messages list.
         val receiverId = arguments?.getString("receiverId") // Get receiverId from arguments
         val receiverName = arguments?.getString("receiverName") // Get receiverName from arguments
 
-        binding.tvChatBetweenWho?.text = "Chat between you and $receiverName"
+        binding.tvChatBetweenWho.text = "Chat between you and $receiverName"
 
         val chatRecycler = binding.rvChat
         val layoutManager = LinearLayoutManager(requireContext())
@@ -87,42 +75,47 @@ class ChatFragment : Fragment() {
 
 
         if (chatCollectionId != null) {
+            // Use viewModel reference to get all messages from Firebase.
             vm.getAllMessages(chatCollectionId)
+            // Observe when messages are updated.
             vm.messages.observe(viewLifecycleOwner) { newMessages ->
+                // Clear old messages and add new messages.
                 messages.clear()
                 messages.addAll(newMessages)
                 adapter.notifyDataSetChanged()
-                scrollToBottom(layoutManager, chatRecycler)
+                scrollToBottom(layoutManager, chatRecycler) // Call function to scroll to last item in recyclerview.
             }
         } else {
-            // Add code if chatCollectionId is null.
+            Log.e("ChatFragment", "chatCollectionId is null")
         }
 
 
         if (currentUserId != null) {
+            // Get current user name from Firebase.
             vm.fetchCurrentUser(currentUserId)
+            // Observe when currentUser is updated.
             vm.currentUser.observe(viewLifecycleOwner) { currentUser ->
                 if (currentUser != null) {
                     currentUserName = currentUser.name
-                    Log.d("!!!", "current user: ${currentUser?.name}")
+                    Log.d("!!!", "current user: ${currentUser.name}")
                 } else {
                     Log.d("!!!", "current user is null")
-
                 }
             }
         }
 
+        // When back button is pressed, go back to FriendsFragment.
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 (activity as? ChatActivity)?.showFriendsListFragment()
             }
         })
+
         binding.btnSend.setOnClickListener {
             val messageText = binding.etMessage.text.toString()
-//            val receiverId = arguments?.getString("receiverId") // Get receiverId from arguments
-//            val receiverName = arguments?.getString("receiverName") // Get receiverName from arguments
 
             if (messageText.isNotEmpty() && chatCollectionId != null && currentUserId != null && receiverId != null) {
+                // Set up message object.
                 val message = Message(
                     id = "",
                     senderId = currentUserId,
@@ -147,9 +140,16 @@ class ChatFragment : Fragment() {
         }
     }
 
+    // Function to automatically scroll to bottom of recyclerview when chat is opened and a new message is added/sent.
     private fun scrollToBottom(layoutManager: LinearLayoutManager, recyclerView: RecyclerView) {
+        // itemCount attribute to get the number of items in the adapter.
+        // The last position is the number of items minus 1.
         val lastPosition = adapter.itemCount - 1
+        // If last position is greater than or equal to 0, scroll to that position.
+        // Skipped if there are no items in the adapter.
         if (lastPosition >= 0) {
+            // smoothScrollToPosition is a function of the RecyclerView class to scroll to a specific position.
+            // State() is a class that keeps track of the current state of the RecyclerView.
             layoutManager.smoothScrollToPosition(recyclerView,
                 RecyclerView.State(), lastPosition)
         }

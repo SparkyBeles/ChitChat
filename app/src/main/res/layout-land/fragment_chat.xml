@@ -7,17 +7,6 @@
     android:background="@drawable/friends_background"
     tools:context=".View.ChatFragment">
 
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_chat"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="80dp"
-        app:layout_constraintBottom_toTopOf="@+id/et_message"
-        app:layout_constraintTop_toTopOf="@id/tv_chat_between_who"
-        tools:layout_editor_absoluteX="0dp"
-        android:layout_marginBottom="20dp"
-        tools:listitem="@layout/chat_item" />
     <TextView
         android:id="@+id/tv_chat_between_who"
         android:layout_width="match_parent"
@@ -30,6 +19,17 @@
         android:paddingBottom="10dp"
         android:textSize="25sp"
         android:text="@string/chat_between_you_and_your_friend"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_chat"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="80dp"
+        app:layout_constraintBottom_toTopOf="@+id/et_message"
+        app:layout_constraintTop_toTopOf="@id/tv_chat_between_who"
+        tools:layout_editor_absoluteX="0dp"
+        android:layout_marginBottom="20dp"
+        tools:listitem="@layout/chat_item" />
 
     <EditText
         android:id="@+id/et_message"
@@ -55,6 +55,5 @@
         android:text="@string/send"
         app:layout_constraintBottom_toBottomOf="parent"
         tools:layout_editor_absoluteX="0dp" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
